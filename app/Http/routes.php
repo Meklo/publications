@@ -10,7 +10,13 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+// ## Route pour la page d'accueil à l'index.php : /
 Route::get('/', function () {
     return view('accueil');
+});
+
+// ## Route pour toutes les pages du site de type : /nompage
+Route::get('{n}', function($n)
+{
+    return view($n);
 });
