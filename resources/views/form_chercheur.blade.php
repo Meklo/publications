@@ -25,16 +25,6 @@ Inscription
       {!! Form::text('name', null, array('class' => 'form-control', 'required' => 'required')) !!}
       {!! $errors->first('name', '<small class="help-block">:message</small>') !!}
     </div>
-    <div class="form-group {!! $errors->has('organisation') ? 'has-error' : '' !!}">
-      {!! Form::label('organisation', 'Organisation :')!!}
-      {!! Form::text('organisation', null, array('class' => 'form-control', 'required' => 'required')) !!}
-      {!! $errors->first('organisation', '<small class="help-block">:message</small>') !!}
-    </div>
-    <div class="form-group {!! $errors->has('équipe') ? 'has-error' : '' !!}">
-      {!! Form::label('équipe', 'Equipe de recherche :') !!}
-      {!! Form::text('équipe', null, array('class' => 'form-control', 'required' => 'required')) !!}
-      {!! $errors->first('équipe', '<small class="help-block">:message</small>') !!}
-    </div>
     <div class="form-group {!! $errors->has('login') ? 'has-error' : '' !!}">
       {!! Form::label('login', 'Login :') !!}
       {!! Form::email('login', null, array('class' => 'form-control', 'placeholder' => 'mail@exemple.fr', 'required' => 'required')) !!}
@@ -45,6 +35,16 @@ Inscription
       {!! Form::label('password', 'Mot de passe :') !!}
       {!! Form::password('password', array('class' => 'form-control', 'required' => 'required')) !!}
       {!! $errors->first('password', '<small class="help-block">:message</small>') !!}
+    </div>
+    <div class="form-group {!! $errors->has('organisation') ? 'has-error' : '' !!}">
+      {!! Form::label('organisation', 'Organisation :')!!}
+      {!! Form::text('organisation', null, array('class' => 'form-control', 'required' => 'required')) !!}
+      {!! $errors->first('organisation', '<small class="help-block">:message</small>') !!}
+    </div>
+    <div class="form-group {!! $errors->has('équipe') ? 'has-error' : '' !!}">
+      {!! Form::label('équipe', 'Equipe de recherche :') !!}
+      {!! Form::text('équipe', null, array('class' => 'form-control', 'required' => 'required')) !!}
+      {!! $errors->first('équipe', '<small class="help-block">:message</small>') !!}
     </div>
     <div class="form-group">
       {!! Form::submit('Valider', array('class' => 'btn btn-primary')) !!}

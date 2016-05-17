@@ -20,6 +20,7 @@ Route::get('/', function () {
 // post pour l'envoie de données du form)
 Route::get('inscriptions','ChercheursController@getInfos');
 Route::post('inscriptions','ChercheursController@postInfos');
+Route::controller('inscriptions', 'ChercheursController');
 
 // ## Route pour toutes les pages du site de type : /nompage
 Route::get('{n}', function($n)

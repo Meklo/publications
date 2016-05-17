@@ -24,10 +24,10 @@ class ChercheurRequest extends Request
         return [
             'first_name' => 'required|min:2|max:30|alpha',
             'name' => 'required|min:2|max:30|alpha',
+            'login' => 'required|email|unique:chercheurs',
+            'password' => 'required|min:5|max:20',
             'organisation' => 'required|max:50',
-            'équipe' => 'required|max:50',
-            'login' => 'required|email',
-            'password' => 'required|min:5|max:20'
+            'équipe' => 'required|max:50'
         ];
     }
 }
