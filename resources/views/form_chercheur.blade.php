@@ -47,6 +47,10 @@ Inscription
       {!! $errors->first('équipe', '<small class="help-block">:message</small>') !!}
     </div>
     <div class="form-group">
+      {!! Form::label('admin', 'Administrateur :') !!}
+      {!! Form::checkbox('admin', 1, false) !!}
+    </div>
+    <div class="form-group">
       {!! Form::submit('Valider', array('class' => 'btn btn-primary')) !!}
     </div>
     {!! Form::close() !!}

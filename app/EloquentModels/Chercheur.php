@@ -8,6 +8,6 @@ class Chercheur extends Model
 {
     protected $table = 'chercheurs';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
 }

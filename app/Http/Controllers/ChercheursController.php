@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\EloquentModels\Chercheur;
+//use App\EloquentModels\Chercheur;
 use App\Http\Requests\ChercheurRequest;
+use App\Repositories\ChercheurRepository;
 
 class ChercheursController extends Controller
 {
@@ -12,18 +13,87 @@ class ChercheursController extends Controller
       return view('form_chercheur');
     }
 
-    function postInfos(ChercheurRequest $request)
+    function postInfos(ChercheurRequest $request, ChercheurRepository $ChercheurRepository)
     {
-      $chercheur = new Chercheur;
-      //$chercheur->chercheur = $request->all();
-      $chercheur->first_name = $request->input('first_name');
-      $chercheur->name = $request->input('name');
-      $chercheur->login = $request->input('login');
-      $chercheur->password = $request->input('password');
-      $chercheur->organisation = $request->input('organisation');
-      $chercheur->équipe = $request->input('équipe');
-      $chercheur->save();
+      // Array of all inputs : $request-all();
+      $ChercheurRepository->save($request->all());
 
       return view('confirm_chercheur');
     }
+
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index()
+  {
+      //
+  }
+
+  /**
+   * Show the form for creating a new resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function create()
+  {
+      //
+  }
+
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+  public function store(Request $request)
+  {
+      //
+  }
+
+  /**
+   * Display the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function show($id)
+  {
+      //
+  }
+
+  /**
+   * Show the form for editing the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function edit($id)
+  {
+      //
+  }
+
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function update(Request $request, $id)
+  {
+      //
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function destroy($id)
+  {
+      //
+  }
 }

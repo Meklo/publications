@@ -18,9 +18,12 @@ class CreateChercheursTable extends Migration
           $table->string('first_name', 50);
       		$table->string('name', 50);
           $table->string('login', 50);
-          $table->string('password', 20);
+          $table->string('password', 60);
           $table->string('organisation', 50);
           $table->string('équipe', 50);
+          $table->boolean('admin')->default(false);
+          $table->rememberToken();
+          $table->timestamps();
       	});
     }
 
