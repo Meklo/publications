@@ -6,6 +6,10 @@ Confirmation
 
 @stop
 
+@section('head')
+<link rel="stylesheet" href="../css/base.css">
+@stop
+
 @section('blocgauche')
 @stop
 

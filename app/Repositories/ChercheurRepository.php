@@ -14,7 +14,12 @@ class ChercheurRepository implements ChercheurRepositoryInterface
 		$this->chercheur = $chercheur;
 	}
 
-	public function save($p_chercheur)
+  public function getPaginate($n)
+	{
+		return $this->chercheur->paginate($n);
+	}
+
+	public function store($p_chercheur)
 	{
 		$chercheur = new $this->chercheur;
     $chercheur->first_name = $p_chercheur['first_name'];
@@ -26,6 +31,21 @@ class ChercheurRepository implements ChercheurRepositoryInterface
     if(array_key_exists('admin',$p_chercheur))$chercheur->admin = $p_chercheur['admin'];
     $chercheur->remember_token = $p_chercheur['_token'];
 		$chercheur->save();
+	}
+
+  public function getById($id)
+	{
+		return $this->chercheur->findOrFail($id);
+	}
+
+	public function update($id, Array $inputs)
+	{
+		$this->save($this->getById($id), $inputs);
+	}
+
+	public function destroy($id)
+	{
+		$this->getById($id)->delete();
 	}
 
 }

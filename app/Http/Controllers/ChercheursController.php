@@ -2,24 +2,33 @@
 
 namespace App\Http\Controllers;
 
-//use App\EloquentModels\Chercheur;
-use App\Http\Requests\ChercheurRequest;
+use App\Http\Requests\ChercheurCreateRequest;
+use App\Http\Requests\ChercheurUpdateRequest;
 use App\Repositories\ChercheurRepository;
 
 class ChercheursController extends Controller
 {
+    protected $chercheurRepository;
+
+    protected $nbrPerPage = 10;
+
     function getInfos()
     {
       return view('form_chercheur');
     }
 
-    function postInfos(ChercheurRequest $request, ChercheurRepository $ChercheurRepository)
+    function postInfos(ChercheurCreateRequest $request, ChercheurRepository $ChercheurRepository)
     {
       // Array of all inputs : $request-all();
       $ChercheurRepository->save($request->all());
 
       return view('confirm_chercheur');
     }
+
+    public function __construct(ChercheurRepository $chercheurRepository)
+    {
+		    $this->chercheurRepository = $chercheurRepository;
+	  }
 
   /**
    * Display a listing of the resource.
@@ -29,6 +38,10 @@ class ChercheursController extends Controller
   public function index()
   {
       //
+    $chercheurs = $this->chercheurRepository->getPaginate($this->nbrPerPage);
+  	$links = $chercheurs->render();
+
+  	return view('chercheurs_liste', compact('chercheurs', 'links'));
   }
 
   /**
@@ -39,6 +52,7 @@ class ChercheursController extends Controller
   public function create()
   {
       //
+      return view('form_chercheur');
   }
 
   /**
@@ -47,9 +61,12 @@ class ChercheursController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
+  public function store(ChercheurCreateRequest $request)
   {
       //
+      $chercheur = $this->chercheurRepository->store($request->all());
+
+      return view('confirm_chercheur');
   }
 
   /**
@@ -61,6 +78,9 @@ class ChercheursController extends Controller
   public function show($id)
   {
       //
+      $chercheur = $this->chercheurRepository->getById($id);
+
+		  return view('show',  compact('chercheur'));
   }
 
   /**
@@ -72,6 +92,9 @@ class ChercheursController extends Controller
   public function edit($id)
   {
       //
+      $chercheur = $this->chercheurRepository->getById($id);
+
+      return view('edit', compact('chercheur'));
   }
 
   /**
@@ -81,9 +104,12 @@ class ChercheursController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, $id)
+  public function update(ChercheurUpdateRequest $request, $id)
   {
       //
+      $this->chercheurRepository->update($id, $request->all());
+
+      return redirect('user')->withOk("L'utilisateur " . $request->input('name') . " a été modifié.");
   }
 
   /**
@@ -95,5 +121,8 @@ class ChercheursController extends Controller
   public function destroy($id)
   {
       //
+      $this->chercheurRepository->destroy($id);
+
+      return redirect()->back();
   }
 }

@@ -6,6 +6,10 @@ Inscription
 
 @stop
 
+@section('head')
+<link rel="stylesheet" href="../css/base.css">
+@stop
+
 @section('blocgauche')
 @stop
 
@@ -14,7 +18,7 @@ Inscription
 <div class="panel panel-default">
   <div class="panel-heading"><h4>Nouvel enseignant</h4></div>
   <div class="panel-body">
-    {!! Form::open(array('url' => 'inscriptions')) !!}
+    {!! Form::open(array('route' => 'chercheur.store')) !!}
     <div class="form-group {!! $errors->has('first_name') ? 'has-error' : '' !!}">
       {!! Form::label('first_name', 'Prénom :') !!}
       {!! Form::text('first_name', null, array('class' => 'form-control', 'required' => 'required')) !!}
@@ -48,7 +52,7 @@ Inscription
     </div>
     <div class="form-group">
       {!! Form::label('admin', 'Administrateur :') !!}
-      {!! Form::checkbox('admin', 1, false) !!}
+      {!! Form::checkbox('admin', 0, false) !!}
     </div>
     <div class="form-group">
       {!! Form::submit('Valider', array('class' => 'btn btn-primary')) !!}
