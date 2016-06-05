@@ -26,8 +26,8 @@ class ChercheurCreateRequest extends Request
             'name' => 'required|min:2|max:30|alpha',
             'login' => 'required|email|unique:chercheurs',
             'password' => 'required|min:5|max:20',
-            'organisation' => 'required|max:50',
-            'équipe' => 'required|max:50'
+            'organisation' => 'required',
+            'equipe' => 'required'
         ];
     }
 }

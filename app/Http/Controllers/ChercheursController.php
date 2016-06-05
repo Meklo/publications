@@ -6,6 +6,12 @@ use App\Http\Requests\ChercheurCreateRequest;
 use App\Http\Requests\ChercheurUpdateRequest;
 use App\Repositories\ChercheurRepository;
 
+use App\Repositories\OrganisationRepository;
+use App\Repositories\EquipeRepository;
+
+use App\EloquentModels\Organisation;
+use App\EloquentModels\Equipe;
+
 class ChercheursController extends Controller
 {
     protected $chercheurRepository;
@@ -51,8 +57,9 @@ class ChercheursController extends Controller
    */
   public function create()
   {
-      //
-      return view('form_chercheur');
+      $organisations = Organisation::orderBy('name')->pluck('name', 'id');
+
+      return view('form_chercheur', compact('organisations'));
   }
 
   /**
@@ -80,7 +87,12 @@ class ChercheursController extends Controller
       //
       $chercheur = $this->chercheurRepository->getById($id);
 
-		  return view('show',  compact('chercheur'));
+      $equipeRep = new EquipeRepository($equipe_m = new Equipe());
+      $organisationRep = new OrganisationRepository($organisation_m = new Organisation());
+      $equipe = $equipeRep->getById($chercheur->id);
+      $organisation = $organisationRep->getById($chercheur->id);
+
+		  return view('chercheurs_show',  compact('chercheur', 'organisation', 'equipe'));
   }
 
   /**
@@ -125,4 +137,5 @@ class ChercheursController extends Controller
 
       return redirect()->back();
   }
+
 }

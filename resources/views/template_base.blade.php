@@ -4,8 +4,9 @@
   <title>@yield('titre')</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <meta name="_token" content="{{ csrf_token() }}" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   @yield('head')
 </head>
@@ -62,6 +63,15 @@
   </div>
 
   <footer class="container-fluid text-center">
+    <script type="test/javascript">
+      $(function () {
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="_token"]').attr('value')
+              }
+          });
+      });
+    </script>
     @yield('pied')
   </footer>
 

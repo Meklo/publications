@@ -18,6 +18,7 @@ Route::get('/', function () {
 
 // ## Routes des méthodes du ChercheursController
 Route::resource('chercheur','ChercheursController');
+Route::get('chercheur/create/complete_equipe/{organisation}', 'EquipesController@getByOrganisation');
 
 // ## Route pour toutes les pages du site de type : /nompage
 Route::get('{n}', function($n)

@@ -8,6 +8,32 @@ Inscription
 
 @section('head')
 <link rel="stylesheet" href="../css/base.css">
+<script>
+  jQuery(document).ready(function($) {
+
+          // Populate equipe
+          $('#organisation').change(function(){
+            var id_organisation = $('#organisation_data').find('option[value='+$('#organisation').val()+']').attr('id');
+            if($.isNumeric(id_organisation))
+            {
+              $.get("create/complete_equipe/"+id_organisation,
+              function(data) {
+                  var numbers = $('#equipe_data');
+                  numbers.empty();
+                  $.each(data, function(key, value) {
+                      numbers.append($("<option>")
+                      .attr("value",value)
+                      .attr("id", key)
+                      );
+                  });
+              });
+            }else {
+              $('#equipe_data').empty();
+            }
+          });
+
+  });
+</script>
 @stop
 
 @section('blocgauche')
@@ -18,7 +44,7 @@ Inscription
 <div class="panel panel-default">
   <div class="panel-heading"><h4>Nouvel enseignant</h4></div>
   <div class="panel-body">
-    {!! Form::open(array('route' => 'chercheur.store')) !!}
+    {!! Form::open(array('route' => 'chercheur.store', 'id' => 'form_chercheur')) !!}
     <div class="form-group {!! $errors->has('first_name') ? 'has-error' : '' !!}">
       {!! Form::label('first_name', 'Prénom :') !!}
       {!! Form::text('first_name', null, array('class' => 'form-control', 'required' => 'required')) !!}
@@ -42,24 +68,21 @@ Inscription
     </div>
     <div class="form-group {!! $errors->has('organisation') ? 'has-error' : '' !!}">
       {!! Form::label('organisation', 'Organisation :')!!}
-      {!! Form::text('organisation', null, array('class' => 'form-control', 'required' => 'required')) !!}
+      {!! Form::datalist('organisation','organisation_data', 'form-control', $organisations) !!}
       {!! $errors->first('organisation', '<small class="help-block">:message</small>') !!}
     </div>
-    <div class="form-group {!! $errors->has('équipe') ? 'has-error' : '' !!}">
-      {!! Form::label('équipe', 'Equipe de recherche :') !!}
-      {!! Form::text('équipe', null, array('class' => 'form-control', 'required' => 'required')) !!}
-      {!! $errors->first('équipe', '<small class="help-block">:message</small>') !!}
+    <div class="form-group {!! $errors->has('equipe') ? 'has-error' : '' !!}s">
+      {!! Form::label('equipe', 'Equipe de recherche :') !!}
+      {!! Form::datalist('equipe','equipe_data', 'form-control', '') !!}
+      {!! $errors->first('equipe', '<small class="help-block">:message</small>') !!}
     </div>
     <div class="form-group">
-      {!! Form::label('admin', 'Administrateur :') !!}
-      {!! Form::checkbox('admin', 0, false) !!}
-    </div>
-    <div class="form-group">
-      {!! Form::submit('Valider', array('class' => 'btn btn-primary')) !!}
+      {!! Form::submit('Valider', array('class' => 'btn btn-primary', 'id' => 'btn_submit')) !!}
     </div>
     {!! Form::close() !!}
   </div>
 </div>
+
 @stop
 
 @section('blocdroit')

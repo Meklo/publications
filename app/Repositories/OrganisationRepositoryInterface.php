@@ -2,12 +2,10 @@
 
 namespace App\Repositories;
 
-interface ChercheurRepositoryInterface
+interface OrganisationRepositoryInterface
 {
 
-  public function  store($chercheur);
-
-  public function getPaginate($n);
+  public function  store($organisation);
 
   public function getById($id);
 

@@ -10,4 +10,9 @@ class Chercheur extends Model
 
     public $timestamps = true;
 
+    public function equipe()
+    {
+        return $this->belongsTo('App\EloquentModels\Equipe');
+    }
+
 }
