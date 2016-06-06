@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ChercheurCreateRequest;
-use App\Http\Requests\ChercheurUpdateRequest;
-use App\Repositories\ChercheurRepository;
+use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserUpdateRequest;
+use App\Repositories\UserRepository;
 
 use App\Repositories\OrganisationRepository;
 use App\Repositories\EquipeRepository;
@@ -12,28 +12,28 @@ use App\Repositories\EquipeRepository;
 use App\EloquentModels\Organisation;
 use App\EloquentModels\Equipe;
 
-class ChercheursController extends Controller
+class UsersController extends Controller
 {
-    protected $chercheurRepository;
+    protected $userRepository;
 
     protected $nbrPerPage = 10;
 
     function getInfos()
     {
-      return view('form_chercheur');
+      return view('form_user');
     }
 
-    function postInfos(ChercheurCreateRequest $request, ChercheurRepository $ChercheurRepository)
+    function postInfos(UserCreateRequest $request, UserRepository $userRepository)
     {
       // Array of all inputs : $request-all();
-      $ChercheurRepository->save($request->all());
+      $userRepository->save($request->all());
 
-      return view('confirm_chercheur');
+      return view('confirm_user');
     }
 
-    public function __construct(ChercheurRepository $chercheurRepository)
+    public function __construct(UserRepository $userRepository)
     {
-		    $this->chercheurRepository = $chercheurRepository;
+		    $this->userRepository = $userRepository;
 	  }
 
   /**
@@ -44,10 +44,10 @@ class ChercheursController extends Controller
   public function index()
   {
       //
-    $chercheurs = $this->chercheurRepository->getPaginate($this->nbrPerPage);
-  	$links = $chercheurs->render();
+    $users = $this->userRepository->getPaginate($this->nbrPerPage);
+  	$links = $users->render();
 
-  	return view('chercheurs_liste', compact('chercheurs', 'links'));
+  	return view('users_liste', compact('users', 'links'));
   }
 
   /**
@@ -59,7 +59,7 @@ class ChercheursController extends Controller
   {
       $organisations = Organisation::orderBy('name')->pluck('name', 'id');
 
-      return view('form_chercheur', compact('organisations'));
+      return view('form_user', compact('organisations'));
   }
 
   /**
@@ -68,12 +68,12 @@ class ChercheursController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(ChercheurCreateRequest $request)
+  public function store(userCreateRequest $request)
   {
       //
-      $chercheur = $this->chercheurRepository->store($request->all());
+      $user = $this->userRepository->store($request->all());
 
-      return view('confirm_chercheur');
+      return view('confirm_user');
   }
 
   /**
@@ -85,14 +85,14 @@ class ChercheursController extends Controller
   public function show($id)
   {
       //
-      $chercheur = $this->chercheurRepository->getById($id);
+      $user = $this->userRepository->getById($id);
 
       $equipeRep = new EquipeRepository($equipe_m = new Equipe());
       $organisationRep = new OrganisationRepository($organisation_m = new Organisation());
-      $equipe = $equipeRep->getById($chercheur->id);
-      $organisation = $organisationRep->getById($chercheur->id);
+      $equipe = $equipeRep->getById($user->id);
+      $organisation = $organisationRep->getById($user->id);
 
-		  return view('chercheurs_show',  compact('chercheur', 'organisation', 'equipe'));
+		  return view('users_show',  compact('user', 'organisation', 'equipe'));
   }
 
   /**
@@ -104,9 +104,9 @@ class ChercheursController extends Controller
   public function edit($id)
   {
       //
-      $chercheur = $this->chercheurRepository->getById($id);
+      $user = $this->userRepository->getById($id);
 
-      return view('edit', compact('chercheur'));
+      return view('edit', compact('user'));
   }
 
   /**
@@ -116,10 +116,10 @@ class ChercheursController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function update(ChercheurUpdateRequest $request, $id)
+  public function update(UserUpdateRequest $request, $id)
   {
       //
-      $this->chercheurRepository->update($id, $request->all());
+      $this->userRepository->update($id, $request->all());
 
       return redirect('user')->withOk("L'utilisateur " . $request->input('name') . " a été modifié.");
   }
@@ -133,7 +133,7 @@ class ChercheursController extends Controller
   public function destroy($id)
   {
       //
-      $this->chercheurRepository->destroy($id);
+      $this->userRepository->destroy($id);
 
       return redirect()->back();
   }

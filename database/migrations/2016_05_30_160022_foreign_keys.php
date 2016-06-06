@@ -13,7 +13,7 @@ class ForeignKeys extends Migration
     public function up()
     {
         //
-        Schema::table('chercheurs', function(Blueprint $table) {
+        Schema::table('users', function(Blueprint $table) {
            $table->foreign('equipe')->references('id')->on('equipes')
                ->onDelete('cascade')
                ->onUpdate('cascade');

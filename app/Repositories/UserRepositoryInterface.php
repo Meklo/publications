@@ -2,10 +2,10 @@
 
 namespace App\Repositories;
 
-interface ChercheurRepositoryInterface
+interface UserRepositoryInterface
 {
 
-  public function  store($chercheur);
+  public function  store($user);
 
   public function getPaginate($n);
 

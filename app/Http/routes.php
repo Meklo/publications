@@ -12,16 +12,25 @@
 */
 
 // ## Route pour la page d'accueil à l'index.php : /
+/*
 Route::get('/', function () {
     return view('accueil');
-});
+});*/
 
 // ## Routes des méthodes du ChercheursController
-Route::resource('chercheur','ChercheursController');
-Route::get('chercheur/create/complete_equipe/{organisation}', 'EquipesController@getByOrganisation');
+//Route::resource('user','UsersController');
+//Route::get('auth.register/complete_equipe/{organisation}', 'EquipesController@getByOrganisation');
 
 // ## Route pour toutes les pages du site de type : /nompage
-Route::get('{n}', function($n)
-{
-    return view($n);
-});
+
+
+Route::get('accueil', array('as' => 'accueil', function()
+    {
+        return View::make('accueil');
+    })
+);
+// ## Routes pour l'authentification
+Route::auth();
+Route::get('/accueil', 'HomeController@accueil');
+Route::get('/home', 'HomeController@index');
+Route::get('register/complete_equipe/{organisation}', 'EquipesController@getByOrganisation');

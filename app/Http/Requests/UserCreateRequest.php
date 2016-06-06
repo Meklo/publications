@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class ChercheurUpdateRequest extends Request
+class UserCreateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,12 @@ class ChercheurUpdateRequest extends Request
     public function rules()
     {
         return [
-            'password' => 'required|min:5|max:20'
+            'first_name' => 'required|min:2|max:30|alpha',
+            'name' => 'required|min:2|max:30|alpha',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:5|confirmed',
+            'organisation' => 'required',
+            'equipe' => 'required'
         ];
     }
 }

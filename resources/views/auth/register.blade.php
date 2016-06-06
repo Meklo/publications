@@ -1,13 +1,11 @@
 @extends('template_base')
 
 @section('titre')
-
 Inscription
-
 @stop
 
 @section('head')
-<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="css/base.css">
 <script>
   jQuery(document).ready(function($) {
 
@@ -16,7 +14,7 @@ Inscription
             var id_organisation = $('#organisation_data').find('option[value='+$('#organisation').val()+']').attr('id');
             if($.isNumeric(id_organisation))
             {
-              $.get("create/complete_equipe/"+id_organisation,
+              $.get("register/complete_equipe/"+id_organisation,
               function(data) {
                   var numbers = $('#equipe_data');
                   numbers.empty();
@@ -44,7 +42,7 @@ Inscription
 <div class="panel panel-default">
   <div class="panel-heading"><h4>Nouvel enseignant</h4></div>
   <div class="panel-body">
-    {!! Form::open(array('route' => 'chercheur.store', 'id' => 'form_chercheur')) !!}
+    {!! Form::open(array( 'url' => 'register' , 'id' => 'form_user')) !!}
     <div class="form-group {!! $errors->has('first_name') ? 'has-error' : '' !!}">
       {!! Form::label('first_name', 'Prénom :') !!}
       {!! Form::text('first_name', null, array('class' => 'form-control', 'required' => 'required')) !!}
@@ -55,16 +53,21 @@ Inscription
       {!! Form::text('name', null, array('class' => 'form-control', 'required' => 'required')) !!}
       {!! $errors->first('name', '<small class="help-block">:message</small>') !!}
     </div>
-    <div class="form-group {!! $errors->has('login') ? 'has-error' : '' !!}">
-      {!! Form::label('login', 'Login :') !!}
-      {!! Form::email('login', null, array('class' => 'form-control', 'placeholder' => 'mail@exemple.fr', 'required' => 'required')) !!}
-      {!! $errors->first('login', '<small class="help-block">:message</small>') !!}
-      <small>Le login doit être de la forme test@exemple.fr</small>
+    <div class="form-group {!! $errors->has('email') ? 'has-error' : '' !!}">
+      {!! Form::label('email', 'email :') !!}
+      {!! Form::email('email', null, array('class' => 'form-control', 'placeholder' => 'mail@exemple.fr', 'required' => 'required')) !!}
+      {!! $errors->first('email', '<small class="help-block">:message</small>') !!}
+      <small>L'email doit être de la forme test@exemple.fr</small>
     </div>
     <div class="form-group {!! $errors->has('password') ? 'has-error' : '' !!}">
       {!! Form::label('password', 'Mot de passe :') !!}
       {!! Form::password('password', array('class' => 'form-control', 'required' => 'required')) !!}
       {!! $errors->first('password', '<small class="help-block">:message</small>') !!}
+    </div>
+    <div class="form-group {!! $errors->has('password_confirmation') ? 'has-error' : '' !!}">
+      {!! Form::label('password_confirmation', 'Confirmation du mot de passe :') !!}
+      {!! Form::password('password_confirmation', array('class' => 'form-control', 'required' => 'required')) !!}
+      {!! $errors->first('password_confirmation', '<small class="help-block">:message</small>') !!}
     </div>
     <div class="form-group {!! $errors->has('organisation') ? 'has-error' : '' !!}">
       {!! Form::label('organisation', 'Organisation :')!!}
@@ -82,7 +85,6 @@ Inscription
     {!! Form::close() !!}
   </div>
 </div>
-
 @stop
 
 @section('blocdroit')

@@ -10,9 +10,9 @@ class Equipe extends Model
 
     public $timestamps = false;
 
-    public function chercheurs()
+    public function users()
     {
-        return $this->hasMany('App\EloquentModels\Chercheur');
+        return $this->hasMany('App\EloquentModels\User');
     }
 
     public function organisation()
