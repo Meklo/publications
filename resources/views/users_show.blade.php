@@ -18,7 +18,7 @@
   <div class="panel panel-default">
     <div class="panel-heading"><h4>{{$user->first_name.' '.$user->name}}</h4></div>
       <div class="panel-body">
-        <p><strong>Email</strong> : {{$user->login}}</p>
+        <p><strong>Email</strong> : {{$user->email}}</p>
         <p><strong>Organisation</strong> : {{$organisation->name}}</p>
         <p><strong>Equipe de recherche</strong> : {{$equipe->name}}</p>
       </div>

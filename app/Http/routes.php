@@ -18,11 +18,7 @@ Route::get('/', function () {
 });*/
 
 // ## Routes des méthodes du ChercheursController
-//Route::resource('user','UsersController');
-//Route::get('auth.register/complete_equipe/{organisation}', 'EquipesController@getByOrganisation');
-
-// ## Route pour toutes les pages du site de type : /nompage
-
+Route::resource('user','UsersController');
 
 Route::get('accueil', array('as' => 'accueil', function()
     {

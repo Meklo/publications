@@ -18,19 +18,6 @@ class UsersController extends Controller
 
     protected $nbrPerPage = 10;
 
-    function getInfos()
-    {
-      return view('form_user');
-    }
-
-    function postInfos(UserCreateRequest $request, UserRepository $userRepository)
-    {
-      // Array of all inputs : $request-all();
-      $userRepository->save($request->all());
-
-      return view('confirm_user');
-    }
-
     public function __construct(UserRepository $userRepository)
     {
 		    $this->userRepository = $userRepository;
@@ -51,32 +38,6 @@ class UsersController extends Controller
   }
 
   /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function create()
-  {
-      $organisations = Organisation::orderBy('name')->pluck('name', 'id');
-
-      return view('form_user', compact('organisations'));
-  }
-
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
-  public function store(userCreateRequest $request)
-  {
-      //
-      $user = $this->userRepository->store($request->all());
-
-      return view('confirm_user');
-  }
-
-  /**
    * Display the specified resource.
    *
    * @param  int  $id
@@ -89,39 +50,10 @@ class UsersController extends Controller
 
       $equipeRep = new EquipeRepository($equipe_m = new Equipe());
       $organisationRep = new OrganisationRepository($organisation_m = new Organisation());
-      $equipe = $equipeRep->getById($user->id);
-      $organisation = $organisationRep->getById($user->id);
+      $equipe = $equipeRep->getById($user->equipe);
+      $organisation = $organisationRep->getById($equipe->organisation);
 
 		  return view('users_show',  compact('user', 'organisation', 'equipe'));
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function edit($id)
-  {
-      //
-      $user = $this->userRepository->getById($id);
-
-      return view('edit', compact('user'));
-  }
-
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function update(UserUpdateRequest $request, $id)
-  {
-      //
-      $this->userRepository->update($id, $request->all());
-
-      return redirect('user')->withOk("L'utilisateur " . $request->input('name') . " a été modifié.");
   }
 
   /**

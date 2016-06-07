@@ -1,74 +1,44 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <title>Accueil</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="css/base.css">
-</head>
-<body>
+@extends('template_base')
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Publications</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="accueil">Accueil</a></li>
-        <li><a href="#">A propos</a></li>
-        <li><a href="#">Contacter</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <form class="navbar-form" role="search">
-            <div class="input-group">
-            <input class="form-control" id="recherche" placeholder="Rechercher">
-            <div class="input-group-btn">
-              <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+@section('titre')
+Accueil
+@stop
+
+@section('head')
+<link rel="stylesheet" href="css/base.css">
+@stop
+
+@section('blocgauche')
+<p><a href="#">Lien 1</a></p>
+<p><a href="#">Lien 2</a></p>
+<p><a href="#">Lien 3</a></p>
+@stop
+
+@section('contenu')
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                  <h1>Bienvenue</h1>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  <hr>
+                  <h3>Test</h3>
+                  <p>Lorem ipsum...</p>
+                </div>
             </div>
-          </div>
-          </form>
-        </li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<div class="container-fluid text-center">
-  <div class="row content">
-      <div class="col-sm-2 sidenav">
-        <p><a href="#">Lien 1</a></p>
-        <p><a href="#">Lien 2</a></p>
-        <p><a href="#">Lien 3</a></p>
-      </div>
-      <div class="col-sm-8 text-left">
-        <h1>Bienvenue</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <hr>
-        <h3>Test</h3>
-        <p>Lorem ipsum...</p>
-      </div>
-      <div class="col-sm-2 sidenav">
-        <div class="well">
-          <p>Rectangle</p>
         </div>
-      </div>
     </div>
-  </div>
+</div>
+@stop
 
-  <footer class="container-fluid text-center">
-    <p>Créé par Hugo et Guillaume</p>
-  </footer>
+@section('blocdroit')
+<div class="well">
+  <p>Rectangle</p>
+</div>
+@stop
 
-  </body>
-</html>
+@section('pied')
+<p>Créé par Hugo et Guillaume</p>
+@stop
