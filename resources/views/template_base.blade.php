@@ -24,9 +24,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="accueil">Accueil</a></li>
-        <li><a href="#">A propos</a></li>
-        <li><a href="#">Contacter</a></li>
+        <li><a href={{route('user.index')}}>Nos chercheurs</a></li>
         @unless (Auth::guest())
           @if (Auth::user()->admin)
             <li><a href="#">Administration</a></li>

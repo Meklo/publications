@@ -21,6 +21,8 @@ class UsersController extends Controller
     public function __construct(UserRepository $userRepository)
     {
 		    $this->userRepository = $userRepository;
+        $this->middleware('auth', ['only' => 'destroy']);
+        $this->middleware('guest');
 	  }
 
   /**

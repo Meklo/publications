@@ -38,7 +38,7 @@ class AuthController extends Controller
      */
     protected $redirectTo = '/home';
 
-    protected $redirectAfterLogout = '/home';
+    protected $redirectAfterLogout = '/accueil';
     /**
      * Create a new authentication controller instance.
      *
@@ -47,7 +47,9 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        //$this->middleware('auth', ['except' => 'login']);
     }
+
 
     /**
      * Show the application registration form.

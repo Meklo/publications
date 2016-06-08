@@ -45,7 +45,7 @@ Connexion
             <div class="col-md-6 col-md-offset-4">
                 <div class="checkbox">
                     <label>
-                                        <input type="checkbox" name="remember"> Remember Me
+                                        <input type="checkbox" name="remember"> Se souvenir de moi
                                     </label>
                 </div>
             </div>
@@ -53,9 +53,18 @@ Connexion
 
         <div class="form-group">
             <div class="col-md-6 col-md-offset-4">
-                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-sign-in"></i>Login
-                                </button>
+              <table class="table">
+                <tr>
+                  <td>
+                    <button type="submit" class="btn btn-secondary">
+                                        Se connecter
+                                    </button>
+                  </td>
+                  <td>
+                    <a href="register" class="btn btn-primary">S'inscrire</a>
+                  </td>
+                </tr>
+              </table>
             </div>
         </div>
     </form>

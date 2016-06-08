@@ -21,11 +21,13 @@ Chercheurs
     @foreach ($users as $user)
       <tr>
         <td><strong>{{$user->first_name.' '.$user->name}}</strong></td>
-        <td>{!! link_to_route('user.show', 'Voir', [$user->id], ['class' => 'btn btn-primary btn-block'])!!}</td>
+        <td>{!! link_to_route('user.show', 'Voir', [$user->id], ['class' => 'btn btn-primary'])!!}</td>
         <td>
-  				{!! Form::open(['method' => 'DELETE', 'route' => ['user.destroy', $user->id]]) !!}
-  				    {!! Form::submit('Supprimer', ['class' => 'btn btn-secondary btn-block', 'onclick' => 'return confirm(\'Voulez-vous vraiment supprimer ce user ?\')']) !!}
-  				{!! Form::close() !!}
+          @if (Auth::check() and Auth::user()->admin)
+    				{!! Form::open(['method' => 'DELETE', 'route' => ['user.destroy', $user->id]]) !!}
+    				    {!! Form::submit('Supprimer', ['class' => 'btn btn-secondary', 'onclick' => 'return confirm(\'Voulez-vous vraiment supprimer ce user ?\')']) !!}
+    				{!! Form::close() !!}
+          @endif
 				</td>
       </tr>
     @endforeach
