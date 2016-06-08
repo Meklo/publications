@@ -51,6 +51,44 @@ class AuthController extends Controller
     }
 
 
+        /**
+         * Show the application login form.
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function getLogin()
+        {
+          if(Auth::check())
+          {
+            return redirect('/accueil');
+          }else {
+            return $this->showLoginForm();
+          }
+
+        }
+
+        /**
+         * Show the application login form.
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function showLoginForm()
+        {
+            $view = property_exists($this, 'loginView')
+                        ? $this->loginView : 'auth.authenticate';
+
+            if(Auth::check())
+            {
+              return redirect('/accueil');
+            }else{
+              if (view()->exists($view)) {
+                  return view($view);
+              }
+
+              return view('auth.login');
+            }
+        }
+
     /**
      * Show the application registration form.
      *

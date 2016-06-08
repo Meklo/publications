@@ -18,16 +18,49 @@ Accueil
 <br>
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-9 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-body">
-                  <h1>Bienvenue</h1>
+                  <h1>Les recherches de l'UTT</h1>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                  <hr>
-                  <h3>Test</h3>
-                  <p>Lorem ipsum...</p>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="container">
+        <div class="col-md-9 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                  <h1>Les dernières publications</h1>
+                  <hr>
+                  <div class="col-md-4 col-md-offset">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <h2>Publication 1</h2>
+                        <hr>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-md-offset">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <h2>Publication 2</h2>
+                        <hr>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-md-offset">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <h2>Publication 3</h2>
+                        <hr>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
         </div>
     </div>
 </div>
@@ -40,5 +73,4 @@ Accueil
 @stop
 
 @section('pied')
-<p>Créé par Hugo et Guillaume</p>
 @stop
