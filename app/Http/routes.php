@@ -20,13 +20,17 @@ Route::get('/', function () {
 // ## Routes des méthodes du ChercheursController
 Route::resource('user','UsersController');
 
+
 Route::get('accueil', array('as' => 'accueil', function()
     {
-        return View::make('accueil');
+        
+       return View::make('accueil');
     })
 );
+
 // ## Routes pour l'authentification
 Route::auth();
 Route::get('/accueil', 'HomeController@accueil');
 Route::get('/home', 'HomeController@index');
 Route::get('register/complete_equipe/{organisation}', 'EquipesController@getByOrganisation');
+

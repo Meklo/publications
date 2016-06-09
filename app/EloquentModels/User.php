@@ -20,5 +20,10 @@ class User extends Model implements Authenticatable
     {
         return $this->belongsTo('App\EloquentModels\Equipe');
     }
+    
+    public function publications()
+    {
+        return $this->belongsToMany('App\EloquentModels\Publication');
+    }
 
 }

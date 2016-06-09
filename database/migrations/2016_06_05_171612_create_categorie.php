@@ -15,9 +15,11 @@ class CreateCategorie extends Migration
         //
         //
         Schema::create('categories', function(Blueprint $table) {
+          $table->engine = 'InnoDB';  
           $table->increments('id')->unsigned();
           $table->string('name', 50);
-          $table->string('sigle', 2);
+          $table->string('sigle', 2)->index();
+
         });
 
         $to_insert = array(
@@ -42,6 +44,6 @@ class CreateCategorie extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('categories');
     }
 }

@@ -14,6 +14,7 @@ class CreateOrganisationTable extends Migration
     {
         //
         Schema::create('organisations', function(Blueprint $table) {
+          $table->engine = 'InnoDB'; 
           $table->increments('id')->unsigned();
           $table->string('name', 50);
         });
