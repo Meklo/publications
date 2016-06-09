@@ -33,6 +33,7 @@ Accueil
             <div class="panel panel-default">
                 <div class="panel-body">
                   <h1>Les dernières publications</h1>
+                  
                   <hr>
                   <div class="col-md-4 col-md-offset">
                     <div class="panel panel-default">

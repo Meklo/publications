@@ -12,7 +12,7 @@ class Publication extends Model
     
     public function categorie()
     {
-        return $this->belongsTo('App\EloquenModels\Categorie');
+        return $this->belongsTo('App\EloquentModels\Categorie');
     }
     
     public function users()

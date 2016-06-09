@@ -33,7 +33,7 @@ class UsersController extends Controller
   public function index()
   {
       //
-    $users = $this->userRepository->getPaginate($this->nbrPerPage);
+        $users = $this->userRepository->getPaginate($this->nbrPerPage);
   	$links = $users->render();
 
   	return view('users_liste', compact('users', 'links'));

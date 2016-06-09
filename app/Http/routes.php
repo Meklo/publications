@@ -34,3 +34,10 @@ Route::get('/accueil', 'HomeController@accueil');
 Route::get('/home', 'HomeController@index');
 Route::get('register/complete_equipe/{organisation}', 'EquipesController@getByOrganisation');
 
+
+##Routes pour créer une publication
+
+Route::get('publication/choosetype', 'PublicationsController@getPublicationStep1');
+Route::post('publication/choosetype', 'PublicationsController@postPublicationStep1');
+
+Route::get('publication/create', 'PublicationsController@getPublicationStep2');
