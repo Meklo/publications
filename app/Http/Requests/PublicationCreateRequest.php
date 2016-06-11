@@ -11,6 +11,7 @@ class PublicationCreateRequest extends Request
      *
      * @return bool
      */
+    
     public function authorize()
     {
         return true;
@@ -24,11 +25,11 @@ class PublicationCreateRequest extends Request
     public function rules()
     {
         return [
-            'title' =>  'required|max:20',
-            'type'  =>  'required',
-            'year'  =>  'required|min:1800|max:2999',
-            'label' =>  'max:20',
-            'place' =>  'max:20'
+//            'title' =>  'required|max:20',
+//            'type'  =>  'required',
+//            'year'  =>  'required',
+//            'label' =>  'max:20',
+//            'place' =>  'max:20'
         ];
     }
 }

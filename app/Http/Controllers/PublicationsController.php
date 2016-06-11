@@ -11,6 +11,14 @@ use App\Repositories\PublicationRepository;
 use App\Repositories\CategorieRepository;
 use App\EloquentModels\Categorie;
 
+use App\Repositories\UserRepository;
+use App\EloquentModels\User;
+
+use App\Repositories\OrganisationRepository;
+use App\Repositories\EquipeRepository;
+
+use App\EloquentModels\Organisation;
+use App\EloquentModels\Equipe;
 
 
 class PublicationsController extends Controller
@@ -58,14 +66,46 @@ class PublicationsController extends Controller
     
     public function getPublicationStep2()
     { 
+        $equipeRep = new EquipeRepository($equipe_m = new Equipe());
+        $organisationRep = new OrganisationRepository($organisation_m = new Organisation());
+        $rep_user = new UserRepository($user_m = new User());
         $rep_categories = new CategorieRepository($categorie_m = new Categorie());
+        
+        
         $type = $rep_categories->getBySigle(Session::get('type'));
-        return view('publication.step_2', compact('type'));
+        
+        //Construction des tableaux pour remplir le select d'auteurs existants
+        
+        $users = $rep_user->getAll();
+        $ids = array();
+        $display = array();
+        
+        foreach ($users as $user)
+        {
+            array_push($ids, $user->id);
+            
+            $orga =$organisationRep->getById($equipeRep->getById($user->equipe)->organisation)->name;
+
+            $temp_string = $user->first_name . ' ' . $user->name . ': '. $orga; 
+            
+            array_push($display, $temp_string);
+
+        }
+        $users = array_combine($ids, $display);    
+        return view('publication.step_2', compact('type', 'users'));
     }
     
     public function postPublicationStep2(PublicationCreateRequest $request)
     { 
-
+        $inputs = $request->all();
+        $inputs = array_merge($inputs,array('type' => Session::get('type')));
+        
+        $this->store($inputs);
+    }
+    
+    public function store($inputs)
+    {
+        $this->publicationRepository->store($inputs);
     }
     
     

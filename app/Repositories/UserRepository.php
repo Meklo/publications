@@ -35,5 +35,9 @@ class UserRepository implements UserRepositoryInterface
 	{
 		$this->getById($id)->delete();
 	}
+        
+          public function getAll(){
+              return $this->user->get();
+          }
 
 }

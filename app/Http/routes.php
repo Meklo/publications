@@ -41,3 +41,4 @@ Route::get('publication/choosetype', 'PublicationsController@getPublicationStep1
 Route::post('publication/choosetype', 'PublicationsController@postPublicationStep1');
 
 Route::get('publication/create', 'PublicationsController@getPublicationStep2');
+Route::post('publication/create', 'PublicationsController@postPublicationStep2');

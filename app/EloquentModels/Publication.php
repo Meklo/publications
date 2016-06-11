@@ -10,6 +10,9 @@ class Publication extends Model
     
     public $timestamps = false;
     
+    protected $fillable = array('title', 'label', 'year', 'place', 'type');
+
+    
     public function categorie()
     {
         return $this->belongsTo('App\EloquentModels\Categorie');

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserPublicationTable extends Migration
+class CreatePublicationUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,16 @@ class CreateUserPublicationTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_publication', function(Blueprint $table) {
+        Schema::create('publication_user', function(Blueprint $table) {
           $table->engine = 'InnoDB';  
             
           $table->increments('id')->unsigned();
-          $table->integer('user_id')->unsigned();
           $table->integer('publication_id')->unsigned();
+          $table->integer('user_id')->unsigned();
           $table->integer('ordre');   
         });
         
-        Schema::table('user_publication', function(Blueprint $table){
+        Schema::table('publication_user', function(Blueprint $table){
             
             
           $table->foreign('publication_id')->references('id')->on('publications');  
@@ -36,6 +36,6 @@ class CreateUserPublicationTable extends Migration
      */
     public function down()
     {
-        Schema::drop('user_publication');
+        Schema::drop('publication_user');
     }
 }
