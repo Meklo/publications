@@ -42,6 +42,9 @@
           @if (Auth::user()->admin)
             <li><a href="#">Administration</a></li>
           @endif
+          @if (Auth::check())
+          <li><a href={{URL('/publication/choosetype')}} >Nouvelle publication</a></li>
+          @endif
         @endunless
       </ul>
       <ul class="nav navbar-nav navbar-right">
