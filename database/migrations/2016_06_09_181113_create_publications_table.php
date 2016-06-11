@@ -16,7 +16,7 @@ class CreatePublicationsTable extends Migration
           $table->engine = 'InnoDB';
 
           $table->increments('id');
-          $table->string('title', 20);
+          $table->string('title', 100);
           $table->string('type', 2);
           $table->integer('year');
           $table->integer('createur')->unsigned();

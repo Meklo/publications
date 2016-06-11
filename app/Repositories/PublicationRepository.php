@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\EloquentModels\Publication;
 use App\Repositories\UserRepository;
-
+use Auth;
 use App\EloquentModels\User;
 
 
@@ -34,7 +34,7 @@ class PublicationRepository implements PublicationRepositoryInterface
 	{
 		$this->getById($id)->delete();
 	}
-        
+
         public function store($inputs)
 	{
             $publicationDB = new $this->publication([
@@ -42,22 +42,22 @@ class PublicationRepository implements PublicationRepositoryInterface
                 'type' => $inputs['type'],
                 'year' => $inputs['year'],
             ]);
-            
+
             if(isset($inputs['place']))
                 $publicationDB->place = $inputs['place'];
-            
+
             if(isset($inputs['label']))
                 $publicationDB->label= $inputs['label'];
-            
-            
+
+            $publicationDB->createur= Auth::user()->id;
             $publicationDB->save();
-                
-                
-                
+
+
+
                 if(isset($inputs['author_select']))
                 {
                     $orders = explode(',', $inputs['order_author']);
-                    
+
                     $i = 1;
                     foreach ($orders as $order)
                     {
