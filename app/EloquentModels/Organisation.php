@@ -10,6 +10,8 @@ class Organisation extends Model
 
     public $timestamps = false;
 
+    protected $fillable = array('name');
+
     public function equipes()
     {
         return $this->hasMany('App\EloquentModels\Equipe');

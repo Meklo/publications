@@ -14,13 +14,13 @@ class User extends Model implements Authenticatable
 
     public $timestamps = true;
 
-    protected $fillable = ['first_name', 'name', 'email', 'password', 'organisation', 'equipe', 'remember_token'];
-    
+    protected $fillable = ['first_name', 'name', 'email', 'password', 'equipe', 'remember_token'];
+
     public function equipe()
     {
         return $this->belongsTo('App\EloquentModels\Equipe');
     }
-    
+
     public function publications()
     {
         return $this->belongsToMany('App\EloquentModels\Publication');

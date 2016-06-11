@@ -10,6 +10,8 @@ class Equipe extends Model
 
     public $timestamps = false;
 
+    protected $fillable = array('name', 'organisation');
+
     public function users()
     {
         return $this->hasMany('App\EloquentModels\User');

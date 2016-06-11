@@ -13,22 +13,24 @@ class CreatePublicationsTable extends Migration
     public function up()
     {
         Schema::create('publications', function(Blueprint $table) {
-          $table->engine = 'InnoDB';  
-            
+          $table->engine = 'InnoDB';
+
           $table->increments('id');
           $table->string('title', 20);
           $table->string('type', 2);
           $table->integer('year');
-          
+          $table->integer('createur')->unsigned();
+          $table->text('contenu');
           $table->string('label', 20)->nullable();
           $table->string('place', 20)->nullable();
-          
-          
+
+
         });
-        
+
         Schema::table('publications', function(Blueprint $table){
-            
+
           $table->foreign('type')->references('sigle')->on('categories');
+          $table->foreign('createur')->references('id')->on('users');
         });
     }
 

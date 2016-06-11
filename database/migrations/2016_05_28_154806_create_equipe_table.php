@@ -14,10 +14,18 @@ class CreateEquipeTable extends Migration
     {
         //
         Schema::create('equipes', function(Blueprint $table) {
-          $table->engine = 'InnoDB'; 
+          $table->engine = 'InnoDB';
           $table->increments('id')->unsigned();
           $table->string('name', 50);
-          $table->integer('organisation');
+          $table->integer('organisation')->unsigned();
+        });
+
+        Schema::table('users', function(Blueprint $table) {
+          $table->foreign('equipe')->references('id')->on('equipes');
+        });
+
+        Schema::table('equipes', function(Blueprint $table) {
+          $table->foreign('organisation')->references('id')->on('organisations');
         });
 
         $to_insert = array(

@@ -13,18 +13,17 @@ class CreatePublicationUserTable extends Migration
     public function up()
     {
         Schema::create('publication_user', function(Blueprint $table) {
-          $table->engine = 'InnoDB';  
-            
+          $table->engine = 'InnoDB';
+
           $table->increments('id')->unsigned();
           $table->integer('publication_id')->unsigned();
           $table->integer('user_id')->unsigned();
-          $table->integer('ordre');   
+          $table->integer('ordre');
         });
-        
+
         Schema::table('publication_user', function(Blueprint $table){
-            
-            
-          $table->foreign('publication_id')->references('id')->on('publications');  
+                
+          $table->foreign('publication_id')->references('id')->on('publications');
           $table->foreign('user_id')->references('id')->on('users');
         });
     }

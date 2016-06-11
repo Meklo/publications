@@ -14,7 +14,7 @@ class CreateOrganisationTable extends Migration
     {
         //
         Schema::create('organisations', function(Blueprint $table) {
-          $table->engine = 'InnoDB'; 
+          $table->engine = 'InnoDB';
           $table->increments('id')->unsigned();
           $table->string('name', 50);
         });
@@ -24,7 +24,7 @@ class CreateOrganisationTable extends Migration
           array('name' => 'UTBM'),
           array('name' => 'UTC')
         );
-        
+
         // Insert some stuff
         DB::table('organisations')->insert($to_insert);
     }
