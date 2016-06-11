@@ -42,3 +42,8 @@ Route::post('publication/choosetype', 'PublicationsController@postPublicationSte
 
 Route::get('publication/create', 'PublicationsController@getPublicationStep2');
 Route::post('publication/create', 'PublicationsController@postPublicationStep2');
+
+##Route pour présenter les résultats d'un recherche
+
+Route::post('/search', 'SearchController@search');
+

@@ -46,14 +46,14 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <form class="navbar-form" role="search">
+          {!! Form::open(array( 'url' => 'search' , 'id' => 'form_publication_categorie', 'role' => 'search', 'class' => 'navbar-form')) !!}
             <div class="input-group">
             <input class="form-control" id="recherche" placeholder="Rechercher">
             <div class="input-group-btn">
-              <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+              {!! Form::button('<i class="glyphicon glyphicon-search"></i>', array('class' => 'btn btn-default', 'type' => 'submit')) !!}
             </div>
           </div>
-          </form>
+          {!! Form::close() !!}
         </li>
         @if (Auth::guest())
           <li><a href={{URL('/login')}}><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
