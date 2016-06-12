@@ -13,7 +13,11 @@ Nouvelle publication
 <div class="panel panel-default">
   <div class="panel-heading"><h4>Resultats de la recherche</h4></div>
   <div class="panel-body">
+    @if ($result != '')
       {!! $result !!}
+    @else
+      Aucun resultat n'a été retourné
+    @endif
   </div>
 </div>
 @stop

@@ -54,7 +54,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          {!! Form::open(array( 'url' => 'search' , 'id' => 'form_publication_categorie', 'role' => 'search', 'class' => 'navbar-form')) !!}
+          {!! Form::open(array('action' => 'SearchController@search', 'id' => 'form_publication_categorie', 'role' => 'search', 'class' => 'navbar-form')) !!}
             <div class="input-group">
             {!! Form::text('recherche', null, array('id' => 'recherche', 'class' => 'form-control', 'placeholder' => 'Rechercher publication')) !!}
             <div class="input-group-btn">

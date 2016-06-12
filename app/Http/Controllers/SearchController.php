@@ -22,23 +22,33 @@ use App\EloquentModels\Equipe;
 
 
 
+
+
 class SearchController extends Controller
 {
     public function search(Request $request)
     {
-        $equipeRep = new EquipeRepository($equipe_m = new Equipe());
-        $organisationRep = new OrganisationRepository($organisation_m = new Organisation());
-        $rep_user = new UserRepository($user_m = new User());
-        $rep_categories = new CategorieRepository($categorie_m = new Categorie());
-        $rep_publications = new PublicationRepository($publication_m = new Publication());
+            if($request->input('recherche') == '')
+                return redirect()->back();
+
+            $equipeRep = new EquipeRepository($equipe_m = new Equipe());
+            $organisationRep = new OrganisationRepository($organisation_m = new Organisation());
+            $rep_user = new UserRepository($user_m = new User());
+            $rep_categories = new CategorieRepository($categorie_m = new Categorie());
+            $rep_publications = new PublicationRepository($publication_m = new Publication());
+
+
+            $search = $request->input('recherche');
+            $result = $rep_publications->getByTitle($search);
+
+            if($result->count() == 0 && $search.contains(' '))
+                $result = $rep_user->getPublicationsByNames($search);
+
+            return view('search.result_publication', compact('result')); 
+            
         
-        
-        $search = $request->input('recherche');
-        $result = $rep_publications->getByTitle($search);
-       
-        if($result->count() == 0 && $search.contains(' '))
-            $result = $rep_user->getPublicationsByNames($search);
-        
-        return view('search.result_publication', compact('result'));
+
+  
+
     }
 }

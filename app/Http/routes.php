@@ -45,5 +45,7 @@ Route::post('publication/create', 'PublicationsController@postPublicationStep2')
 
 ##Route pour présenter les résultats d'un recherche
 
+
+Route::get('/search', 'HomeController@accueil');
 Route::post('/search', 'SearchController@search');
 
