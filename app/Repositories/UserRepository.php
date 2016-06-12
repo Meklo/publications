@@ -64,5 +64,14 @@ class UserRepository implements UserRepositoryInterface
             
             return '';
         }
+        
+        public function getByNames($names)
+        {
+             if(count($names) == 2)
+            {
+                $result = $this->user->where('first_name', 'LIKE', '%'.$names[0].'%')->where('name', 'LIKE', '%'.$names[1].'%')->first();
+                return $result;
+            }
+        }
 
 }

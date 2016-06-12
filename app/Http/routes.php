@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 // ## Routes des méthodes du ChercheursController
 Route::resource('user','UsersController');
-
+Route::get('user/{id}/publications', array('as' => 'user.publications', 'uses' => 'UsersController@publications'));
 
 Route::get('accueil', array('as' => 'accueil', function()
     {
@@ -53,3 +53,8 @@ Route::post('publication/create', 'PublicationsController@postPublicationStep2')
 
 Route::get('/search', 'HomeController@accueil');
 Route::post('/search', 'SearchController@search');
+
+
+
+
+

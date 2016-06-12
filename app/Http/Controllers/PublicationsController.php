@@ -43,12 +43,17 @@ class PublicationsController extends Controller
       foreach ($categories as $categorie) {
         $categories_tab[$categorie->sigle] = $categorie->name;
       }
+      
+      $tabName = 'Publications';
 
-      return view('publication.publications_liste', compact('publications', 'links', 'categories_tab'));
+      return view('publication.publications_liste', compact('publications', 'links', 'categories_tab', 'tabName'));
     }
 
     public function getPublicationStep1()
     {
+        if(!auth()->check())
+            return redirect()->back();
+        
         $rep_categories = new CategorieRepository($categorie_m = new Categorie());
         $categories = $rep_categories->getAll();
 
@@ -75,6 +80,9 @@ class PublicationsController extends Controller
 
     public function getPublicationStep2()
     {
+        if(!auth()->check())
+            return redirect('accueil');
+        
         $equipeRep = new EquipeRepository($equipe_m = new Equipe());
         $organisationRep = new OrganisationRepository($organisation_m = new Organisation());
         $rep_user = new UserRepository($user_m = new User());
@@ -110,6 +118,7 @@ class PublicationsController extends Controller
         $inputs = array_merge($inputs,array('type' => Session::get('type')));
 
         $this->store($inputs);
+        return redirect('accueil');
     }
 
     public function store($inputs)

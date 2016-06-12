@@ -26,29 +26,56 @@ use App\EloquentModels\Equipe;
 
 class SearchController extends Controller
 {
+    
+    
+    protected $equipeRep;
+    protected $organisationRep;
+    protected $rep_user;
+    protected $rep_categories ;
+    protected $rep_publications ;
+    
+    public function __construct()
+    {
+         $equipeRep = new EquipeRepository($equipe_m = new Equipe());
+         $organisationRep = new OrganisationRepository($organisation_m = new Organisation());
+         $rep_user = new UserRepository($user_m = new User());
+         $rep_categories = new CategorieRepository($categorie_m = new Categorie());
+         $rep_publications = new PublicationRepository($publication_m = new Publication());
+
+    }
+    
     public function search(Request $request)
     {
+         $equipeRep = new EquipeRepository($equipe_m = new Equipe());
+         $organisationRep = new OrganisationRepository($organisation_m = new Organisation());
+         $rep_user = new UserRepository($user_m = new User());
+         $rep_categories = new CategorieRepository($categorie_m = new Categorie());
+         $rep_publications = new PublicationRepository($publication_m = new Publication());
+         
+        
             if($request->input('recherche') == '')
                 return redirect()->back();
 
-            $equipeRep = new EquipeRepository($equipe_m = new Equipe());
-            $organisationRep = new OrganisationRepository($organisation_m = new Organisation());
-            $rep_user = new UserRepository($user_m = new User());
-            $rep_categories = new CategorieRepository($categorie_m = new Categorie());
-            $rep_publications = new PublicationRepository($publication_m = new Publication());
-
+            
+            $categories = $rep_categories->getAll();
+            $categories_tab = array();
+            foreach ($categories as $categorie) {
+              $categories_tab[$categorie->sigle] = $categorie->name;
+            }
+            
+           
 
             $search = $request->input('recherche');
-            $result = $rep_publications->getByTitle($search);
+            $results = $rep_publications->getByTitle($search);
 
-            if($result->count() == 0 && $search.contains(' '))
-                $result = $rep_user->getPublicationsByNames($search);
-
-            return view('search.result_publication', compact('result')); 
+            if($results->count() == 0 && $search.contains(' '))
+                $results = $rep_user->getPublicationsByNames($search);
             
-        
+            $publications = $results ;
 
-  
-
+            $tabName = 'Résultats de la recherche pour: "'. $request->input('recherche').'"';
+            
+            return view('publication.publications_liste', compact('publications', 'categories_tab','tabName')); 
     }
+    
 }

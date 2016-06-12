@@ -12,6 +12,9 @@ use App\Repositories\EquipeRepository;
 use App\EloquentModels\Organisation;
 use App\EloquentModels\Equipe;
 
+use App\Repositories\CategorieRepository;
+use App\EloquentModels\Categorie;
+
 class UsersController extends Controller
 {
     protected $userRepository;
@@ -71,5 +74,23 @@ class UsersController extends Controller
 
       return redirect()->back();
   }
+  
+    public function publications($id)
+    {
+        $rep_categories = new CategorieRepository($categorie_m = new Categorie());
+        $categories = $rep_categories->getAll();
+            $categories_tab = array();
+            foreach ($categories as $categorie) {
+              $categories_tab[$categorie->sigle] = $categorie->name;
+        }
+        
+        
+        $publications = $this->userRepository->getById($id)->publications()->get();
+        
+        $auteur = $this->userRepository->getById($id);
+        $tabName = 'Publications de ' .$auteur->first_name . ' '. $auteur->name;
+        
+        return view('publication.publications_liste', compact('publications', 'categories_tab', 'tabName')); 
+    }
 
 }
