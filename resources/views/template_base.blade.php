@@ -56,7 +56,7 @@
         <li>
           {!! Form::open(array( 'url' => 'search' , 'id' => 'form_publication_categorie', 'role' => 'search', 'class' => 'navbar-form')) !!}
             <div class="input-group">
-            <input class="form-control" id="recherche" placeholder="Rechercher">
+            {!! Form::text('recherche', null, array('id' => 'recherche', 'class' => 'form-control', 'placeholder' => 'Rechercher publication')) !!}
             <div class="input-group-btn">
               {!! Form::button('<i class="glyphicon glyphicon-search"></i>', array('class' => 'btn btn-default', 'type' => 'submit')) !!}
             </div>

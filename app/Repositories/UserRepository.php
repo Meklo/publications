@@ -19,13 +19,13 @@ class UserRepository implements UserRepositoryInterface
 		$this->user = $user;
 	}
 
-  public function getPaginate($n)
+        public function getPaginate($n)
 	{
 		return $this->user->paginate($n);
 	}
 
 
-  public function getById($id)
+        public function getById($id)
 	{
 		return $this->user->findOrFail($id);
 	}
@@ -36,8 +36,33 @@ class UserRepository implements UserRepositoryInterface
 		$this->getById($id)->delete();
 	}
         
-          public function getAll(){
+        public function getAll(){
               return $this->user->get();
-          }
+        }
+        
+        public function getPublicationsByNames($name) {
+            $names = explode(' ', $name);
+            
+            if(count($names) == 2)
+            {
+                $result = $this->user->where('first_name', 'LIKE', '%'.$names[0].'%')->where('name', 'LIKE', '%'.$names[1].'%')->first();
+            
+            if($result)
+                $result = $result->publications()->get();
+            
+            return $result;
+            }
+            else if(count($names) == 1)
+            {
+                    $result = $this->user->where('first_name', 'LIKE', '%'.$names[0].'%')->orWhere('name', 'LIKE', '%'.$names[0].'%')->first();
+            
+            if($result)
+                $result = $result->publications()->get();
+            
+            return $result;
+            }
+            
+            return '';
+        }
 
 }

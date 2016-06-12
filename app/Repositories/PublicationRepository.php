@@ -22,6 +22,8 @@ class PublicationRepository implements PublicationRepositoryInterface
 	{
 		return $this->publication->paginate($p);
 	}
+        
+        
 
 
   public function getById($id)
@@ -66,5 +68,9 @@ class PublicationRepository implements PublicationRepositoryInterface
                     }
                 }
 	}
+        
+        public function getByTitle($title) {
+            return $this->publication->where('title','LIKE', '%'.$title.'%')->get();
+        }
 
 }

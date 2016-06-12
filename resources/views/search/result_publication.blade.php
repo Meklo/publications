@@ -9,7 +9,13 @@ Nouvelle publication
 @stop
 
 @section('contenu')
-Resultats
+<br/>
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Resultats de la recherche</h4></div>
+  <div class="panel-body">
+      {!! $result !!}
+  </div>
+</div>
 @stop
 
 @section('blocdroit')
