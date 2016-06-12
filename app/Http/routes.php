@@ -23,7 +23,7 @@ Route::resource('user','UsersController');
 
 Route::get('accueil', array('as' => 'accueil', function()
     {
-        
+
        return View::make('accueil');
     })
 );
@@ -34,18 +34,22 @@ Route::get('/accueil', 'HomeController@accueil');
 Route::get('/home', 'HomeController@index');
 Route::get('register/complete_equipe/{organisation}', 'EquipesController@getByOrganisation');
 
+// ## Publications
+//Route::resource('publication','PublicationsController');
+
+// ## Affichages des publications
+Route::get('publication', 'PublicationsController@index');
+Route::get('publication/show', array('as' => 'publication.show', 'uses' => 'PublicationsController@show'));
 
 ##Routes pour créer une publication
-
 Route::get('publication/choosetype', 'PublicationsController@getPublicationStep1');
 Route::post('publication/choosetype', 'PublicationsController@postPublicationStep1');
 
 Route::get('publication/create', 'PublicationsController@getPublicationStep2');
 Route::post('publication/create', 'PublicationsController@postPublicationStep2');
 
-##Route pour présenter les résultats d'un recherche
+##Route pour présenter les résultats d'une recherche
 
 
 Route::get('/search', 'HomeController@accueil');
 Route::post('/search', 'SearchController@search');
-
