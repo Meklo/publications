@@ -19,7 +19,7 @@ class Equipe extends Model
 
     public function organisation()
     {
-        return $this->belongsTo('App\EloquentModels\Organisation');
+        return $this->belongsTo('App\EloquentModels\Organisation', 'organisation', 'id');
     }
 
 }

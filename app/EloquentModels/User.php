@@ -18,7 +18,7 @@ class User extends Model implements Authenticatable
 
     public function equipe()
     {
-        return $this->belongsTo('App\EloquentModels\Equipe');
+        return $this->belongsTo('App\EloquentModels\Equipe', 'equipe', 'id');
     }
 
     public function publications()

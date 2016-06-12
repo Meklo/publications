@@ -70,9 +70,12 @@ Publications
             </td>
             <td>{{$categories_tab[$publication->type]}}</td>
             <td>{{$publication->year}}</td>
-            <td>{!! link_to_route('publication.show', 'Voir', [$publication->id], ['class' => 'btn btn-primary'])!!}</td>
-            <td>
-    				</td>
+            <td>{!! link_to_route('publication.show', 'Voir', ['id' => $publication->id], ['class' => 'btn btn-primary'])!!}</td>
+            @if (Auth::check())
+                @if(in_array(Auth::user()->id, $id_users))
+                     <td>{!! link_to_route('publication.show', 'Modifier', [$publication->id], ['class' => 'btn btn-primary'])!!}</td>
+                @endif
+            @endif
           </tr>
         @endforeach
       </table>

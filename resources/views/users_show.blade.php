@@ -14,7 +14,9 @@
 @stop
 
 @section('contenu')
-  <br>
+
+  <h2>Informations du chercheur</h2>
+    <br>
   <div class="container">
     <div class="col-md-8 col-md-offset-1">
       <div class="panel panel-default">

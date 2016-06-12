@@ -48,12 +48,14 @@ class PublicationsController extends Controller
 
       return view('publication.publications_liste', compact('publications', 'links', 'categories_tab', 'tabName'));
     }
+    
+  
 
     public function getPublicationStep1()
     {
         if(!auth()->check())
             return redirect()->back();
-        
+      
         $rep_categories = new CategorieRepository($categorie_m = new Categorie());
         $categories = $rep_categories->getAll();
 
@@ -134,7 +136,12 @@ class PublicationsController extends Controller
      */
     public function show($id)
     {
-        // Pour gérer le vue en détails d'une publication
+        $publication = $this->publicationRepository->getById($id);
+        $auteurs = $publication->users()->get();
+        
+        $categorie = $publication->categorie->name;
+
+        return view('publication.show', compact('publication', 'auteurs','categorie'));
     }
 
 }

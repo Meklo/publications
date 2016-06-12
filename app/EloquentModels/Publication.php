@@ -15,7 +15,7 @@ class Publication extends Model
 
     public function categorie()
     {
-        return $this->belongsTo('App\EloquentModels\Categorie');
+        return $this->belongsTo('App\EloquentModels\Categorie', 'type', 'sigle');
     }
 
     public function users()

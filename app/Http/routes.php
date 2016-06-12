@@ -39,7 +39,7 @@ Route::get('register/complete_equipe/{organisation}', 'EquipesController@getByOr
 
 // ## Affichages des publications
 Route::get('publication', 'PublicationsController@index');
-Route::get('publication/show', array('as' => 'publication.show', 'uses' => 'PublicationsController@show'));
+Route::get('publication/{id}', array('as' => 'publication.show', 'uses' => 'PublicationsController@show'))->where('id', '[0-9]+');
 
 ##Routes pour créer une publication
 Route::get('publication/choosetype', 'PublicationsController@getPublicationStep1');
