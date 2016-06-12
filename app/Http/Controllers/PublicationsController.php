@@ -25,24 +25,33 @@ class PublicationsController extends Controller
 {
     protected $publicationRepository;
     protected $nbrPerPage = 10;
-    
+
     public function __construct(PublicationRepository $publicationRepository)
     {
-	$this->publicationRepository = $publicationRepository;
+    	$this->publicationRepository = $publicationRepository;
     }
-    
+
     public function index()
     {
-//        $publications = $this->publicationRepository->getPaginate($this->nbrPerPage);
-//        $links = $publications->render();
-//        return view('accueil', compact('publications', 'links'));
+      //$publications = $this->publicationRepository->getPaginate($this->nbrPerPage);
+      $publications = $this->publicationRepository->getWithUsersCateogoriePaginate($this->nbrPerPage);
+      $links = $publications->render();
+
+      $rep_categories = new CategorieRepository($categorie_m = new Categorie());
+      $categories = $rep_categories->getAll();
+      $categories_tab = array();
+      foreach ($categories as $categorie) {
+        $categories_tab[$categorie->sigle] = $categorie->name;
+      }
+
+      return view('publication.publications_liste', compact('publications', 'links', 'categories_tab'));
     }
-    
+
     public function getPublicationStep1()
     {
         $rep_categories = new CategorieRepository($categorie_m = new Categorie());
         $categories = $rep_categories->getAll();
-        
+
         $names = array();
         $sigles = array();
         foreach($categories as $categorie)
@@ -51,62 +60,72 @@ class PublicationsController extends Controller
             array_push($sigles, $categorie->sigle);
         }
         $categories = array_combine($sigles, $names);
-        
+
         return view('publication.step_1', compact('categories'));
     }
-    
+
     public function postPublicationStep1(Request $request)
     {
-       
+
         Session::put('type', $request->input('type'));
         return redirect('publication/create');
-        
+
     }
-    
-    
+
+
     public function getPublicationStep2()
-    { 
+    {
         $equipeRep = new EquipeRepository($equipe_m = new Equipe());
         $organisationRep = new OrganisationRepository($organisation_m = new Organisation());
         $rep_user = new UserRepository($user_m = new User());
         $rep_categories = new CategorieRepository($categorie_m = new Categorie());
-        
-        
+
+
         $type = $rep_categories->getBySigle(Session::get('type'));
-        
+
         //Construction des tableaux pour remplir le select d'auteurs existants
-        
+
         $users = $rep_user->getAll();
         $ids = array();
         $display = array();
-        
+
         foreach ($users as $user)
         {
             array_push($ids, $user->id);
-            
+
             $orga =$organisationRep->getById($equipeRep->getById($user->equipe)->organisation)->name;
 
-            $temp_string = $user->first_name . ' ' . $user->name . ': '. $orga; 
-            
+            $temp_string = $user->first_name . ' ' . $user->name . ': '. $orga;
+
             array_push($display, $temp_string);
 
         }
-        $users = array_combine($ids, $display);    
+        $users = array_combine($ids, $display);
         return view('publication.step_2', compact('type', 'users'));
     }
-    
+
     public function postPublicationStep2(PublicationCreateRequest $request)
-    { 
+    {
         $inputs = $request->all();
         $inputs = array_merge($inputs,array('type' => Session::get('type')));
-        
+
         $this->store($inputs);
     }
-    
+
     public function store($inputs)
     {
         $this->publicationRepository->store($inputs);
     }
-    
-    
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        // Pour gérer le vue en détails d'une publication
+    }
+
 }

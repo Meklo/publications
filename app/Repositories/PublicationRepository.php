@@ -22,15 +22,11 @@ class PublicationRepository implements PublicationRepositoryInterface
 	{
 		return $this->publication->paginate($p);
 	}
-        
-        
-
 
   public function getById($id)
 	{
 		return $this->publication->findOrFail($id);
 	}
-
 
 	public function destroy($id)
 	{
@@ -68,9 +64,21 @@ class PublicationRepository implements PublicationRepositoryInterface
                     }
                 }
 	}
-        
-        public function getByTitle($title) {
+
+        public function getByTitle($title)
+        {
             return $this->publication->where('title','LIKE', '%'.$title.'%')->get();
         }
+
+      public function queryWithUsersCateogorie()
+      {
+          return $this->publication->with('users', 'categorie')
+      	     ->orderBy('publications.year', 'desc');
+      }
+
+      public function getWithUsersCateogoriePaginate($n)
+      {
+          return $this->queryWithUsersCateogorie()->paginate($n);
+      }
 
 }
