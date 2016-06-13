@@ -10,4 +10,5 @@ interface PublicationRepositoryInterface
   
   public function destroy($id);
   public function store($inputs);
+  public function update($request, $id);
 }

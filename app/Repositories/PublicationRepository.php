@@ -52,7 +52,7 @@ class PublicationRepository implements PublicationRepositoryInterface
 
 
 
-                if(isset($inputs['author_select']))
+                if(isset($inputs['user_list']))
                 {
                     $orders = explode(',', $inputs['order_author']);
 
@@ -80,5 +80,11 @@ class PublicationRepository implements PublicationRepositoryInterface
       {
           return $this->queryWithUsersCateogorie()->paginate($n);
       }
+      
+      public function update($request, $id)
+      {
+          
+      }
+      
 
 }

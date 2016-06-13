@@ -23,5 +23,6 @@ class Publication extends Model
         return $this->belongsToMany('App\EloquentModels\User')
                 ->withPivot('ordre');
     }
+    
 
 }

@@ -32,7 +32,7 @@ class PublicationsController extends Controller
     }
 
     public function index()
-    {
+    {      
       //$publications = $this->publicationRepository->getPaginate($this->nbrPerPage);
       $publications = $this->publicationRepository->getWithUsersCateogoriePaginate($this->nbrPerPage);
       $links = $publications->render();
@@ -142,6 +142,69 @@ class PublicationsController extends Controller
         $categorie = $publication->categorie->name;
 
         return view('publication.show', compact('publication', 'auteurs','categorie'));
+    }
+    
+    
+    
+    public function edit($id)
+    {
+        $publication =  $this->publicationRepository->getById($id);
+        
+        $equipeRep = new EquipeRepository($equipe_m = new Equipe());
+        $organisationRep = new OrganisationRepository($organisation_m = new Organisation());
+        $rep_user = new UserRepository($user_m = new User());
+        $rep_categories = new CategorieRepository($categorie_m = new Categorie());       
+        
+        $users = $rep_user->getAll();
+        $ids = array();
+        $display = array();
+        
+        $ordreAuteurs =array();
+
+        foreach ($users as $user)
+        {
+            array_push($ids, $user->id);
+
+            $orga =$organisationRep->getById($equipeRep->getById($user->equipe)->organisation)->name;
+
+            $temp_string = $user->first_name . ' ' . $user->name . ': '. $orga;
+
+            array_push($display, $temp_string);
+        
+        }
+        $usersTotal = array_combine($ids, $display);
+ 
+  
+      foreach($publication->users()->orderBy('publication_user.ordre','asc')->get() as $user)
+      {
+          $ordreAuteurs[$user->pivot->ordre] = $user->id;
+      }
+
+      $initialString ='';
+      $i = 1;
+      
+      foreach($ordreAuteurs as $ordre){
+           $initialString .= $usersTotal[$ordreAuteurs[$i]]. ', ';
+           $i++;
+       } 
+              
+        return view('publication.edit', compact('publication', 'usersTotal', 'ordreAuteurs', 'initialString'));
+    }
+    
+    public function update(Request $request, $id)
+    {
+            $publication = $this->publicationRepository->getById($id);
+            $publication->title  = $request['title'];
+            
+            if ($publication->type == 'CI' || $publication->type == 'CF' || $publication->type == 'RI' || $publication->type == 'RF' || $publication->type == 'OS' )
+                $publication->label = $request['label'];
+            
+            
+            $publication->save();
+            
+            $request->session()->flash('alert-success', 'Changement pris en comptes');
+
+            return redirect()->action('PublicationsController@index');
     }
 
 }

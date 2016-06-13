@@ -15,6 +15,14 @@ Publications
 
 @section('contenu')
 <br>
+<div class="flash-message">
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+      @if(Session::has('alert-' . $msg))
+
+      <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+      @endif
+    @endforeach
+  </div> <!-- end .flash-message -->
 
 <div class="container">
   <div class="col-md-8 col-md-offset-1">
@@ -70,10 +78,10 @@ Publications
             </td>
             <td>{{$categories_tab[$publication->type]}}</td>
             <td>{{$publication->year}}</td>
-            <td>{!! link_to_route('publication.show', 'Voir', ['id' => $publication->id], ['class' => 'btn btn-primary'])!!}</td>
+            <td>{!! link_to_route('publication.show', 'Voir', ['id' => $publication->id], ['class' => 'btn btn-default'])!!}</td>
             @if (Auth::check())
                 @if(in_array(Auth::user()->id, $id_users))
-                     <td>{!! link_to_route('publication.show', 'Modifier', [$publication->id], ['class' => 'btn btn-primary'])!!}</td>
+                     <td>{!! link_to_route('publication.edit', 'Modifier', [$publication->id], ['class' => 'btn btn-primary'])!!}</td>
                 @endif
             @endif
           </tr>

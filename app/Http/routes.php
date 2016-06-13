@@ -38,8 +38,14 @@ Route::get('register/complete_equipe/{organisation}', 'EquipesController@getByOr
 //Route::resource('publication','PublicationsController');
 
 // ## Affichages des publications
-Route::get('publication', 'PublicationsController@index');
+Route::get('publication',  array('as' => 'publication.index', 'uses' => 'PublicationsController@index'));
 Route::get('publication/{id}', array('as' => 'publication.show', 'uses' => 'PublicationsController@show'))->where('id', '[0-9]+');
+
+##Modification d'une publication
+Route::get('publication/{id}/edit', array('as' => 'publication.edit', 'uses' => 'PublicationsController@edit'))->where('id', '[0-9]+');
+Route::post('publication/{id}/update', array('as' => 'publication.update', 'uses' => 'PublicationsController@update'))->where('id', '[0-9]+');
+
+
 
 ##Routes pour créer une publication
 Route::get('publication/choosetype', 'PublicationsController@getPublicationStep1');

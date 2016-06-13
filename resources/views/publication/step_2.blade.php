@@ -30,9 +30,7 @@ Inscription
                 if (options.length === 0) {
                     return 'Aucun sélectionné';
                 }
-                else if (options.length > 3) {
-                    return options.length + ' selected';
-                }
+                
                 else {
                     var selected = [];
                     options.each(function() {
@@ -120,7 +118,7 @@ Inscription
     <div class="form-group {!! $errors->has('authors') ? 'has-error' : '' !!}">
       {!! Form::label('authors', 'Sélection auteurs :') !!}
  
-      {{ Form::select('author_select[]',$users ,null,array('multiple'=>'multiple','id' => 'author_select')) }}
+      {{ Form::select('user_list[]',$users ,null,array('multiple'=>'multiple','id' => 'author_select')) }}
       {!! $errors->first('authors', '<small class="help-block">:message</small>') !!}
       <br/>
     <div class="form-group">
