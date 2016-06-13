@@ -40,7 +40,7 @@
         <li><a href={{route('user.index')}}>Nos chercheurs</a></li>
         @unless (Auth::guest())
           @if (Auth::user()->admin)
-            <li><a href="#">Administration</a></li>
+            <li>{{link_to_route('admin.index','Administration')}}</li>
           @endif
 
         @endunless

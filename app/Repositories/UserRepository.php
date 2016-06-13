@@ -9,6 +9,8 @@ use App\Repositories\EquipeRepository;
 use App\EloquentModels\Organisation;
 use App\EloquentModels\Equipe;
 
+use DB;
+
 class UserRepository implements UserRepositoryInterface
 {
 
@@ -34,7 +36,7 @@ class UserRepository implements UserRepositoryInterface
       return $this->queryWithEquipe()->paginate($n);
   }
 
-        public function getById($id)
+  public function getById($id)
 	{
 		return $this->user->findOrFail($id);
 	}
@@ -83,4 +85,36 @@ class UserRepository implements UserRepositoryInterface
             }
         }
 
+   public function getNbUsers()
+   {
+     return $result = $this->user->count();
+   }
+
+   public function getUserWithMaxPublications()
+   {
+     $subQuery = DB::table('publication_user')
+               ->selectRaw('user_id, COUNT(*) as nb')
+               ->groupBy('user_id');
+
+      $id = DB::table('publication_user')
+                ->selectRaw('user_id, MAX(nb) as nb')
+                ->from(DB::raw(' ( ' . $subQuery->toSql() . ' ) publication_user') )
+                ->mergeBindings($subQuery)
+                ->get();
+    $user_nbpub = array();
+    $user_nbpub['nb']=$id[0]->nb;
+    $user_nbpub['user'] = $this->getById($id[0]->user_id);
+    return $user_nbpub;
+   }
+
+   public function getUsersWithDescNbPublications()
+   {
+    return DB::table('users')
+              ->selectRaw('users.id, users.first_name, users.name,COUNT(*) as nb')
+              ->join('publication_user','users.id', '=', 'publication_user.user_id')
+              ->groupBy('publication_user.user_id')
+              ->orderBy('nb','desc')
+              ->get();
+
+   }
 }

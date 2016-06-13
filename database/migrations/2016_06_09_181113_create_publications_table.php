@@ -20,7 +20,6 @@ class CreatePublicationsTable extends Migration
           $table->string('type', 2);
           $table->integer('year');
           $table->integer('createur')->unsigned();
-          $table->text('contenu');
           $table->string('label', 20)->nullable();
           $table->string('place', 20)->nullable();
 

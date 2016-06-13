@@ -15,10 +15,12 @@
 
 @section('contenu')
 
-  <h2>Informations du chercheur</h2>
+
     <br>
   <div class="container">
-    <div class="col-md-8 col-md-offset-1">
+    <div class="col-sm-11">
+      <h2>Informations du chercheur</h2>
+      <br>
       <div class="panel panel-default">
         <div class="panel-heading"><h4>{{$user->first_name.' '.$user->name}}</h4></div>
           <div class="panel-body">

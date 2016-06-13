@@ -80,11 +80,17 @@ class PublicationRepository implements PublicationRepositoryInterface
       {
           return $this->queryWithUsersCateogorie()->paginate($n);
       }
-      
+
       public function update($request, $id)
       {
-          
+
       }
-      
+
+
+  public function getNbPublications()
+  {
+    return $this->publication->count();
+  }
+
 
 }

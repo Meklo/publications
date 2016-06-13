@@ -18,7 +18,7 @@ Accueil
 <br>
 <div class="container">
     <div class="row">
-        <div class="col-md-9 col-md-offset-1">
+        <div class="col-md-11">
             <div class="panel panel-default">
                 <div class="panel-body">
                   <h1>Les recherches de l'UTT</h1>
@@ -29,13 +29,13 @@ Accueil
     </div>
     <div class="row">
       <div class="container">
-        <div class="col-md-9 col-md-offset-1">
+        <div class="col-md-11">
             <div class="panel panel-default">
                 <div class="panel-body">
                   <h1>Les dernières publications</h1>
 
                   <hr>
-                  <div class="col-md-4 col-md-offset">
+                  <div class="col-md-4">
                     <div class="panel panel-default">
                       <div class="panel-body">
                         <h2>Publication 1</h2>
@@ -43,7 +43,7 @@ Accueil
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-4 col-md-offset">
+                  <div class="col-md-4">
                     <div class="panel panel-default">
                       <div class="panel-body">
                         <h2>Publication 2</h2>
@@ -51,7 +51,7 @@ Accueil
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-4 col-md-offset">
+                  <div class="col-md-4">
                     <div class="panel panel-default">
                       <div class="panel-body">
                         <h2>Publication 3</h2>

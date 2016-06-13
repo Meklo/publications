@@ -56,11 +56,10 @@ Route::post('publication/create', 'PublicationsController@postPublicationStep2')
 
 ##Route pour présenter les résultats d'une recherche
 
-
 Route::get('/search', 'HomeController@accueil');
 Route::post('/search', 'SearchController@search');
 
-
-
-
-
+## Route pour la page d'administration
+Route::get('admin',  array('as' => 'admin.index', 'uses' => 'AdminController@index'));
+Route::get('admin/rank',  array('as' => 'admin.rank', 'uses' => 'AdminController@rank'));
+Route::get('admin/kink',  array('as' => 'admin.kink', 'uses' => 'AdminController@kink'));

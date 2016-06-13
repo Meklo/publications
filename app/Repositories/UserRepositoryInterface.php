@@ -10,9 +10,15 @@ interface UserRepositoryInterface
   public function getById($id);
 
   public function destroy($id);
-        
+
   public function getAll();
-  
+
   public function getPublicationsByNames($name);
-  
+
+  public function getNbUsers();
+
+  public function getUserWithMaxPublications();
+
+  public function getUsersWithDescNbPublications();
+
 }

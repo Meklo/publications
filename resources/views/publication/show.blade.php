@@ -7,7 +7,7 @@ Publications
 @stop
 
 @section('head')
-<link rel="stylesheet" href="./css/base.css">
+<link rel="stylesheet" href="../css/base.css">
 @stop
 
 @section('blocgauche')
@@ -24,16 +24,16 @@ Publications
           <div class="panel-body">
             <p><strong>Categorie</strong> : {{ $categorie }}</p>
             <p><strong>Année de publication</strong> : {{$publication->year}}</p>
-            
+
             @if ($publication->type == 'RI' || $publication->type == 'RF' || $publication->type == 'CI' || $publication->type == 'CF' || $publication->type == 'OS' )
-            
+
             <p><strong>Label</strong> : {{$publication->label}}</p>
-            
+
             @endif
             @if ( $publication->type == 'CI' || $publication->type == 'CF')
-            
+
             <p><strong>Lieu</strong> : {{$publication->place}}</p>
-            
+
             @endif
           </div>
       </div>
