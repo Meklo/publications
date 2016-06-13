@@ -80,7 +80,7 @@ Publications
             <td>{{$publication->year}}</td>
             <td>{!! link_to_route('publication.show', 'Voir', ['id' => $publication->id], ['class' => 'btn btn-default'])!!}</td>
             @if (Auth::check())
-                @if(in_array(Auth::user()->id, $id_users))
+                @if(in_array(Auth::user()->id, $id_users) || Auth::user()->id == $publication->createur)
                      <td>{!! link_to_route('publication.edit', 'Modifier', [$publication->id], ['class' => 'btn btn-primary'])!!}</td>
                 @endif
             @endif

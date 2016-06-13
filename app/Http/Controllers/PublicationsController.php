@@ -202,6 +202,24 @@ class PublicationsController extends Controller
             
             $publication->save();
             
+            foreach($publication->users()->get() as $user)
+            {
+                $publication->users()->detach($user->id);
+            }
+            
+            $orders = explode(',', $request['order_author']);
+
+            $i = 1;
+            foreach ($orders as $order)
+            {
+                $publication->users()->attach($order, ['publication_id'=> $publication->id,'ordre' => $i]);
+                $i++;
+            }
+                  
+                    
+                   
+                
+            
             $request->session()->flash('alert-success', 'Changement pris en comptes');
 
             return redirect()->action('PublicationsController@index');

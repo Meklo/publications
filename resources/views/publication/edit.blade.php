@@ -60,8 +60,9 @@
         }); 
         
          $('#btn_submit').on('click', function() {
+            
             var selected = [];
-            $('#author_select option:selected').each(function() {
+            $('#user_list option:selected').each(function() {
                 selected.push([$(this).val(), $(this).data('order')]);
             });
  
