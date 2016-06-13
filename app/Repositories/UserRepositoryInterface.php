@@ -21,4 +21,7 @@ interface UserRepositoryInterface
 
   public function getUsersWithDescNbPublications();
 
+  public function getDoublonUserPublication();
+
+
 }

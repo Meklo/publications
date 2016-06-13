@@ -13,4 +13,6 @@ interface PublicationRepositoryInterface
   public function update($request, $id);
 
   public function getNbPublications();
+
+  public function getDoublonsPublication();
 }

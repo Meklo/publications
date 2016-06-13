@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\EloquentModels\Publication;
 use App\Repositories\UserRepository;
 use Auth;
+use DB;
 use App\EloquentModels\User;
 
 
@@ -92,5 +93,18 @@ class PublicationRepository implements PublicationRepositoryInterface
     return $this->publication->count();
   }
 
+  public function getDoublonsPublication()
+  {
+           return DB::select( DB::raw('SELECT DISTINCT *
+              FROM publications t1
+              WHERE EXISTS (
+                            SELECT *
+                            FROM publications t2
+                            WHERE t1.id <> t2.id
+                            AND   t1.type = t2.type
+                            AND   t1.year = t2.year )
+              ORDER BY title ')
+           );
+  }
 
 }

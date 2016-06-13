@@ -51,12 +51,21 @@ class AdminController extends Controller
     public function kink()
     {
       // Liste des anomalies
-      
-      // article avec deux fois le même auteur
-      // article présent deux fois dans la base
-      // article dont aucun auteur n'est un chercheur de l'UTT
 
-      return view('admin.kink');
+      // publication avec deux fois le même auteur
+      $doublons = $this->rep_user->getDoublonUserPublication();
+      $list_doublons_users = array();
+      $count = 0;
+      foreach ($doublons as $doublon) {
+        $list_doublons_users[$count]['publication'] = $this->rep_publications->getById($doublon->publication_id);
+        $list_doublons_users[$count]['user'] = $this->rep_user->getById($doublon->user_id);
+        $count++;
+      }
+
+      // publication présente deux fois dans la base
+      $list_doublons_publications = $this->rep_publications->getDoublonsPublication();
+
+      return view('admin.kink', compact('list_doublons_users','list_doublons_publications'));
     }
 
 

@@ -117,4 +117,13 @@ class UserRepository implements UserRepositoryInterface
               ->get();
 
    }
+
+   public function getDoublonUserPublication()
+   {
+     return DB::table('publication_user')
+               ->selectRaw('user_id, publication_id, COUNT(*) as nb_doublons')
+               ->groupBy('publication_id','user_id')
+               ->having('nb_doublons','>','1')
+               ->get();
+   }
 }

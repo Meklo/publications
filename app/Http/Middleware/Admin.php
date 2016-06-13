@@ -19,6 +19,6 @@ class Admin
       {
         return $next($request);
       }
-      return return redirect()->back(); // Normalement on devrait regiriger vers la liste des publications, par défaut je mets la page d'accueil temporaire
+      return redirect()->back(); // Normalement on devrait regiriger vers la liste des publications, par défaut je mets la page d'accueil temporaire
     }
 }
