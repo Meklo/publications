@@ -12,6 +12,8 @@ class Equipe extends Model
 
     protected $fillable = array('name', 'organisation');
 
+    protected $with = ['organisation'];
+
     public function users()
     {
         return $this->hasMany('App\EloquentModels\User');

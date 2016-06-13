@@ -7,11 +7,11 @@
   <meta name="_token" content="{{ csrf_token() }}" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  
+
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  
-  
-  
+
+
+
   <script type="test/javascript">
     $(function () {
         $.ajaxSetup({
@@ -42,21 +42,21 @@
           @if (Auth::user()->admin)
             <li><a href="#">Administration</a></li>
           @endif
-          
+
         @endunless
-        
-                  <li class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Publications <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href={{URL('/publication')}} >Liste des publications</a></li>
-                     @if (Auth::check())
-                    <li><a href={{URL('/publication/choosetype')}} >Nouvelle publication</a></li>
+
+                    @if (Auth::check() and Auth::user()['relations']['equipe']['relations']['organisation']['attributes']['name'] == 'UTT')
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Publications <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href={{URL('/publication')}} >Liste des publications</a></li>
+                        <li><a href={{URL('/publication/choosetype')}} >Nouvelle publication</a></li>
+                      </ul>
+                    </li>
+                    @else
+                      <li><a href={{URL('/publication')}}>Publications</a></li>
                     @endif
-                </ul>
-          </li>
-       
-        
-      </ul>
+    </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
           {!! Form::open(array('action' => 'SearchController@search', 'id' => 'form_publication_categorie', 'role' => 'search', 'class' => 'navbar-form')) !!}

@@ -16,6 +16,8 @@ class User extends Model implements Authenticatable
 
     protected $fillable = ['first_name', 'name', 'email', 'password', 'equipe', 'remember_token'];
 
+    protected $with = ['equipe'];
+
     public function equipe()
     {
         return $this->belongsTo('App\EloquentModels\Equipe', 'equipe', 'id');

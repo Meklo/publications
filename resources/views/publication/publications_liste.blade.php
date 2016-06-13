@@ -28,7 +28,7 @@ Publications
   <div class="col-md-8 col-md-offset-1">
     <div class="panel panel-default">
       <div class="panel-heading"><h4>{{ $tabName }}</h4></div>
-      
+
       @if (count($publications) > 0)
         <table class="table">
           <tr>
@@ -55,20 +55,16 @@ Publications
                 <?php
                   ksort($ordre_user);
                   ksort($id_users);
-                  
+
                   $auteurs_tab = array();
-                  
+
                   $iterator = new MultipleIterator;
                   $iterator->attachIterator(new ArrayIterator($ordre_user));
                   $iterator->attachIterator(new ArrayIterator($id_users));
-                  
+
                   foreach ($iterator as $keys => $values) {
                     $auteurs_tab[]= array($values[0], $values[1] ) ;
                   }
-                  
-                  
-                  
-                  //$auteur_chaine = implode(', ', $auteurs_tab);
 
                 ?>
                 @foreach($auteurs_tab as $lien_auteur)
@@ -78,26 +74,30 @@ Publications
             </td>
             <td>{{$categories_tab[$publication->type]}}</td>
             <td>{{$publication->year}}</td>
-            <td>{!! link_to_route('publication.show', 'Voir', ['id' => $publication->id], ['class' => 'btn btn-default'])!!}</td>
-            @if (Auth::check())
+            @if (Auth::check() and Auth::user()['relations']['equipe']['relations']['organisation']['attributes']['name'] == 'UTT')
                 @if(in_array(Auth::user()->id, $id_users) || Auth::user()->id == $publication->createur)
-                     <td>{!! link_to_route('publication.edit', 'Modifier', [$publication->id], ['class' => 'btn btn-primary'])!!}</td>
+                    <td>{!! link_to_route('publication.show', 'Voir', ['id' => $publication->id], ['class' => 'btn btn-default'])!!}</td>
+                    <td>{!! link_to_route('publication.edit', 'Modifier', [$publication->id], ['class' => 'btn btn-primary'])!!}</td>
+                @else
+                    <td colspan="2">{!! link_to_route('publication.show', 'Voir', ['id' => $publication->id], ['class' => 'btn btn-default'])!!}</td>
                 @endif
+            @else
+              <td colspan="2">{!! link_to_route('publication.show', 'Voir', ['id' => $publication->id], ['class' => 'btn btn-default'])!!}</td>
             @endif
           </tr>
         @endforeach
       </table>
-      
+
       @else
-      
+
       <div class="panel-body">
-          
+
           Aucun résultat n'a été retourné
       </div>
-      
+
       @endif
-      
-      
+
+
     </div>
   </div>
 </div>

@@ -36,7 +36,7 @@ class UsersController extends Controller
   public function index()
   {
       //
-        $users = $this->userRepository->getPaginate($this->nbrPerPage);
+    $users = $this->userRepository->getWithEquipePaginate($this->nbrPerPage);
   	$links = $users->render();
 
   	return view('users_liste', compact('users', 'links'));
@@ -74,7 +74,7 @@ class UsersController extends Controller
 
       return redirect()->back();
   }
-  
+
     public function publications($id)
     {
         $rep_categories = new CategorieRepository($categorie_m = new Categorie());
@@ -83,14 +83,14 @@ class UsersController extends Controller
             foreach ($categories as $categorie) {
               $categories_tab[$categorie->sigle] = $categorie->name;
         }
-        
-        
+
+
         $publications = $this->userRepository->getById($id)->publications()->get();
-        
+
         $auteur = $this->userRepository->getById($id);
         $tabName = 'Publications de ' .$auteur->first_name . ' '. $auteur->name;
-        
-        return view('publication.publications_liste', compact('publications', 'categories_tab', 'tabName')); 
+
+        return view('publication.publications_liste', compact('publications', 'categories_tab', 'tabName'));
     }
 
 }
