@@ -11,31 +11,20 @@
 |
 */
 
-// ## Route pour la page d'accueil à l'index.php : /
-/*
-Route::get('/', function () {
-    return view('accueil');
-});*/
+// ## Route pour la page d'accueil à l'index.php :
+Route::get('/', array('as' => 'accueil', 'uses' => 'HomeController@accueil'));
+Route::get('accueil', array('as' => 'accueil', 'uses' => 'HomeController@accueil'));
 
 // ## Routes des méthodes du ChercheursController
 Route::resource('user','UsersController');
 Route::get('user/{id}/publications', array('as' => 'user.publications', 'uses' => 'UsersController@publications'));
 
-Route::get('accueil', array('as' => 'accueil', function()
-    {
-
-       return View::make('accueil');
-    })
-);
-
 // ## Routes pour l'authentification
 Route::auth();
-Route::get('/accueil', 'HomeController@accueil');
 Route::get('/home', 'HomeController@index');
 Route::get('register/complete_equipe/{organisation}', 'EquipesController@getByOrganisation');
 
 // ## Publications
-//Route::resource('publication','PublicationsController');
 
 // ## Affichages des publications
 Route::get('publication',  array('as' => 'publication.index', 'uses' => 'PublicationsController@index'));

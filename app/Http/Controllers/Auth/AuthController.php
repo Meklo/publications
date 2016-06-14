@@ -47,7 +47,6 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
-        //$this->middleware('auth', ['except' => 'login']);
     }
 
 
@@ -96,7 +95,7 @@ class AuthController extends Controller
      */
     public function getRegister()
     {
-        return $this->showRegistrationForm();
+      return $this->showRegistrationForm();
     }
 
     /**
@@ -106,6 +105,10 @@ class AuthController extends Controller
      */
     public function showRegistrationForm()
     {
+      if(Auth::check())
+      {
+          return redirect('/accueil');
+      }else{
         $organisations = Organisation::orderBy('name')->pluck('name', 'id');
 
         if (property_exists($this, 'registerView')) {
@@ -113,6 +116,7 @@ class AuthController extends Controller
         }
 
         return view('auth.register', compact('organisations'));
+      }
 
     }
 

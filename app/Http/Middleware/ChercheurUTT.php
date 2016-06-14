@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
-class Admin
+class ChercheurUTT
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,13 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-      if (Auth::check() && $request->user()->admin)
+      if (Auth::check())
       {
-        return $next($request);
+        if($request->user()['relations']['equipe']['relations']['organisation']['attributes']['name'] == 'UTT')
+        {
+          return $next($request);
+        }
+
       }
         return redirect('/'); // Normalement on devrait regiriger vers la liste des publications, par défaut je mets la page d'accueil temporaire
     }

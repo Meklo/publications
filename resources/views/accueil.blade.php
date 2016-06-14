@@ -9,9 +9,6 @@ Accueil
 @stop
 
 @section('blocgauche')
-<p><a href="#">Lien 1</a></p>
-<p><a href="#">Lien 2</a></p>
-<p><a href="#">Lien 3</a></p>
 @stop
 
 @section('contenu')
@@ -30,6 +27,7 @@ Accueil
     <div class="row">
       <div class="container">
         <div class="col-md-11">
+        @if(count($publications)>2)
             <div class="panel panel-default">
                 <div class="panel-body">
                   <h1>Les dernières publications</h1>
@@ -37,30 +35,40 @@ Accueil
                   <hr>
                   <div class="col-md-4">
                     <div class="panel panel-default">
-                      <div class="panel-body">
-                        <h2>Publication 1</h2>
-                        <hr>
-                      </div>
+                      <a href={{url('/publication/'.$publications[0]['attributes']['id'])}}>
+                        <div class="panel-body">
+                          <h3>{{$publications[0]['attributes']['title']}}</h3>
+                            <hr>
+                            <p>{{$publications[0]['relations']['categorie']['attributes']['name']}}</p>
+                        </div>
+                      </a>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="panel panel-default">
-                      <div class="panel-body">
-                        <h2>Publication 2</h2>
-                        <hr>
-                      </div>
+                      <a href={{url('/publication/'.$publications[1]['attributes']['id'])}}>
+                        <div class="panel-body">
+                          <h3>{{$publications[1]['attributes']['title']}}</h3>
+                          <hr>
+                          <p>{{$publications[1]['relations']['categorie']['attributes']['name']}}</p>
+                        </div>
+                      </a>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="panel panel-default">
-                      <div class="panel-body">
-                        <h2>Publication 3</h2>
-                        <hr>
-                      </div>
+                      <a href={{url('/publication/'.$publications[2]['attributes']['id'])}}>
+                        <div class="panel-body">
+                          <h3>{{$publications[2]['attributes']['title']}}</h3>
+                          <hr>
+                          <p>{{$publications[2]['relations']['categorie']['attributes']['name']}}</p>
+                        </div>
+                      </a>
                     </div>
                   </div>
                 </div>
             </div>
+          @endif
           </div>
         </div>
     </div>
@@ -68,9 +76,6 @@ Accueil
 @stop
 
 @section('blocdroit')
-<div class="well">
-  <p>Rectangle</p>
-</div>
 @stop
 
 @section('pied')

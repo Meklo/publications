@@ -21,7 +21,7 @@ class AdminController extends Controller
     {
          $this->rep_user = new UserRepository($user_m = new User());
          $this->rep_publications = new PublicationRepository($publication_m = new Publication());
-
+         $this->middleware('admin');
     }
 
     public function index()
