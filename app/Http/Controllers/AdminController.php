@@ -35,7 +35,12 @@ class AdminController extends Controller
       $nbusers = $this->rep_user->getNbUsers();
 
       // Le chercheur avec le plus de publications
-      $user_nb = $this->rep_user->getUserWithMaxPublications();
+      $user_nb = array();
+      if($nbpublications > 0)
+      {
+          $user_nb = $this->rep_user->getUserWithMaxPublications();
+      }
+
 
       return view('admin.index', compact('nbpublications', 'nbusers','user_nb'));
 

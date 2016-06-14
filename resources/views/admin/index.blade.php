@@ -34,7 +34,12 @@ Administration
       <div class="panel panel-default">
         <div class="panel-heading"><h4>Chercheurs</h4></div>
           <div class="panel-body">
-            <p>Il y a un total de <strong>{{$nbusers}}</strong> chercheurs sur le site. Le plus actif d'entre eux est {!! link_to_route('user.show', $user_nb["user"]->first_name.' '.$user_nb["user"]->name, [$user_nb["user"]->id])!!} avec un total de <strong>{{$user_nb["nb"]}}</strong> {!! link_to_route('user.publications', 'publications', ['id' => $user_nb["user"]->id]) !!}.</p>
+            <p>Il y a un total de <strong>{{$nbusers}}</strong> chercheurs sur le site.
+            @if(count($user_nb) > 0)
+             Le plus actif d'entre eux est {!! link_to_route('user.show', $user_nb["user"]->first_name.' '.$user_nb["user"]->name, [$user_nb["user"]->id])!!} avec un total de <strong>{{$user_nb["nb"]}}</strong> {!! link_to_route('user.publications', 'publications', ['id' => $user_nb["user"]->id]) !!}.</p>
+            @else
+            </p>
+            @endif
           </div>
       </div>
     </div>

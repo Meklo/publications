@@ -20,10 +20,6 @@ class CreateEquipeTable extends Migration
           $table->integer('organisation')->unsigned();
         });
 
-        Schema::table('users', function(Blueprint $table) {
-          $table->foreign('equipe')->references('id')->on('equipes');
-        });
-
         Schema::table('equipes', function(Blueprint $table) {
           $table->foreign('organisation')->references('id')->on('organisations');
         });
@@ -31,9 +27,13 @@ class CreateEquipeTable extends Migration
         $to_insert = array(
           array('name' => 'ERA', 'organisation' => 1),
           array('name' => 'LOSI', 'organisation' => 1),
-          array('name' => 'Tech-cico', 'organisation' => 1)
+          array('name' => 'CREIDD', 'organisation' => 1),
+          array('name' => 'Tech-cico', 'organisation' => 1),
+          array('name' => 'GAMMA3', 'organisation' => 1),
+          array('name' => 'LASMIS', 'organisation' => 1),
+          array('name' => 'LM2S', 'organisation' => 1),
+          array('name' => 'LNIO', 'organisation' => 1)
         );
-
         // Insert some stuff
         DB::table('equipes')->insert($to_insert);
     }
