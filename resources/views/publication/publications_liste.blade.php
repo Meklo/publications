@@ -10,10 +10,13 @@ Publications
 <link rel="stylesheet" href="./css/base.css">
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#searchCat").hide();
         
         $("#button_searchCat").click(function(){
             $("#searchCat").slideToggle();
+        });
+        
+        $("#button_searchTeam").click(function(){
+            $("#searchTeam").slideToggle();
         });
         
     });
@@ -100,6 +103,8 @@ Publications
           </tr>
         @endforeach
       </table>
+      
+      {{ $links }}
 
       @else
 
@@ -146,17 +151,24 @@ Publications
             </div>
                </div>
           
-        </div>
+        
             
             {!! Form::close() !!}
+             </div>
         </li>
         
-<!--         <li class="list-group-item"><h5>FILTRER PUBLICATIONS EQUIPES</h5>
-            {!! Form::open(array('action' => 'EquipesController@postPublicationsForm', 'class' => 'form-inline')) !!}
+        <li class="list-group-item"><div id='button_searchTeam'><h5>FILTRER PUBLICATIONS PAR EQUIPE<span class="caret pull-right"/></h5></div>
+             <div id='searchTeam' style="display:none;">
+            {!! Form::open(array('route' => ['publication.searchTeam'], 'class' => 'form-inline')) !!}
         
             <div class="well well-lg">
             <div class="form-group">
-              {!! Form::select('type', $categories_tab) !!}
+              {!! Form::label('equipe', 'Equipe :') !!}
+              {!! Form::text('equipe', null, array('class' => 'form-control', 'required' => 'required')) !!}
+            </div>
+            <div class="form-group">
+              {!! Form::label('year', 'A partir de l\'année :') !!}
+              {!! Form::number('year', null, array('class' => 'form-control', 'required' => 'required')) !!}
             </div>
 
             <div class="form-group pull-right">
@@ -165,7 +177,8 @@ Publications
         </div>
             
             {!! Form::close() !!}
-        </li>-->
+             </div>
+        </li>
 
       </ul>
     </div>

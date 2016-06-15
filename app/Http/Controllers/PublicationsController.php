@@ -62,11 +62,34 @@ class PublicationsController extends Controller
 
       $publications = $this->publicationRepository->getPublicationsCategoriePaginate($request->get('type'), $this->nbrPerPage);
       $links = $publications->render();
-      
 
-      $tabName = 'Publications de la catégorie : '. $request->get('type');
+      $tabName = 'Publications de la catégorie : '. $rep_categories->getBySigle($request->get('type'))->name;
 
       return view('publication.publications_liste', compact('publications', 'links', 'categories_tab', 'tabName'));
+    }
+    
+    public function postSearchPublicationEquipe(Request $request)
+    {
+      if($request->get('equipe') == '')
+          return redirect ()->back ();
+        
+      $rep_categories = new CategorieRepository($categorie_m = new Categorie());
+      $categories = $rep_categories->getAll();
+      $categories_tab = array();
+      foreach ($categories as $categorie) {
+        $categories_tab[$categorie->sigle] = $categorie->name;
+      }
+      
+      $rep_equipe = new EquipeRepository($equipe_m = new Equipe());
+
+      $publications = $rep_equipe->getPublicationsEquipePaginate($request->get('equipe'),$request->get('year'), $this->nbrPerPage);
+
+
+      
+     $links = $publications->render();
+      $tabName = 'Publications des membres de l\'équipe : '. $request->get('equipe'). ' à partir de '. $request->get('year');
+
+      return view('publication.publications_liste', compact('links', 'categories_tab', 'tabName'))->withPublications($publications);
     }
 
 

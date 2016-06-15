@@ -93,11 +93,6 @@ class PublicationRepository implements PublicationRepositoryInterface
           return $this->getPublicationsCategorie($categorie)->paginate($n);
       }
 
-      public function update($request, $id)
-      {
-
-      }
-
 
   public function getNbPublications()
   {

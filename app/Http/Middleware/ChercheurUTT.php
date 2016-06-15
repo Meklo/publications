@@ -25,5 +25,6 @@ class ChercheurUTT
 
       }
         return redirect('/'); // Normalement on devrait regiriger vers la liste des publications, par défaut je mets la page d'accueil temporaire
+   
     }
 }

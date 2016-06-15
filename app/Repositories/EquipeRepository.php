@@ -56,5 +56,34 @@ class EquipeRepository implements EquipeRepositoryInterface
 	{
 		$this->getById($id)->delete();
 	}
+        
+        
+      public function getPublicationsEquipe($equipe,$year)
+      {       
+          $query_results = DB::table('publications')
+                   ->join('publication_user', 'publications.id', '=', 'publication_user.publication_id')
+                   ->join('users', 'publication_user.user_id', '=', 'users.id')
+                   ->join('equipes', 'users.equipe', '=', 'equipes.id')
+                   ->where('equipes.name', 'LIKE', $equipe)->get();  
+          
+          $publication =  new \App\EloquentModels\Publication();  
+          
+      
+          $result = array();
+          foreach($query_results as $row)
+          {
+              array_push($result, $row->id);
+          }
+          return $publication->whereIn('id',$result)->where('year', '>=', $year)->orderBy('publications.year', 'desc');      
+      }
+
+      public function getPublicationsEquipePaginate($equipe, $year,$n)
+      { 
+         
+          return $this->getPublicationsEquipe($equipe,$year)->paginate($n);
+          
+
+          
+      }
 
 }
