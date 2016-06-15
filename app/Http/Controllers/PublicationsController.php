@@ -29,11 +29,12 @@ class PublicationsController extends Controller
     public function __construct(PublicationRepository $publicationRepository)
     {
     	$this->publicationRepository = $publicationRepository;
+      $this->middleware('auth',['only' => ['getPublicationStep1','getPublicationStep2','edit']]);
+      $this->middleware('chercheur_utt', ['only' => ['getPublicationStep1','getPublicationStep2','edit']]);
     }
 
     public function index()
-    {      
-      //$publications = $this->publicationRepository->getPaginate($this->nbrPerPage);
+    {
       $publications = $this->publicationRepository->getWithUsersCateogoriePaginate($this->nbrPerPage);
       $links = $publications->render();
 
@@ -43,19 +44,16 @@ class PublicationsController extends Controller
       foreach ($categories as $categorie) {
         $categories_tab[$categorie->sigle] = $categorie->name;
       }
-      
+
       $tabName = 'Publications';
 
       return view('publication.publications_liste', compact('publications', 'links', 'categories_tab', 'tabName'));
     }
-    
-  
+
+
 
     public function getPublicationStep1()
     {
-        if(!auth()->check())
-            return redirect()->back();
-      
         $rep_categories = new CategorieRepository($categorie_m = new Categorie());
         $categories = $rep_categories->getAll();
 
@@ -84,7 +82,7 @@ class PublicationsController extends Controller
     {
         if(!auth()->check())
             return redirect('accueil');
-        
+
         $equipeRep = new EquipeRepository($equipe_m = new Equipe());
         $organisationRep = new OrganisationRepository($organisation_m = new Organisation());
         $rep_user = new UserRepository($user_m = new User());
@@ -157,27 +155,27 @@ class PublicationsController extends Controller
     {
         $publication = $this->publicationRepository->getById($id);
         $auteurs = $publication->users()->get();
-        
+
         $categorie = $publication->categorie->name;
 
         return view('publication.show', compact('publication', 'auteurs','categorie'));
     }
-    
-    
-    
+
+
+
     public function edit($id)
     {
         $publication =  $this->publicationRepository->getById($id);
-        
+
         $equipeRep = new EquipeRepository($equipe_m = new Equipe());
         $organisationRep = new OrganisationRepository($organisation_m = new Organisation());
         $rep_user = new UserRepository($user_m = new User());
-        $rep_categories = new CategorieRepository($categorie_m = new Categorie());       
-        
+        $rep_categories = new CategorieRepository($categorie_m = new Categorie());
+
         $users = $rep_user->getAll();
         $ids = array();
         $display = array();
-        
+
         $ordreAuteurs =array();
 
         foreach ($users as $user)
@@ -189,11 +187,11 @@ class PublicationsController extends Controller
             $temp_string = $user->first_name . ' ' . $user->name . ': '. $orga;
 
             array_push($display, $temp_string);
-        
+
         }
         $usersTotal = array_combine($ids, $display);
- 
-  
+
+
       foreach($publication->users()->orderBy('publication_user.ordre','asc')->get() as $user)
       {
           $ordreAuteurs[$user->pivot->ordre] = $user->id;
@@ -201,31 +199,31 @@ class PublicationsController extends Controller
 
       $initialString ='';
       $i = 1;
-      
+
       foreach($ordreAuteurs as $ordre){
            $initialString .= $usersTotal[$ordreAuteurs[$i]]. ', ';
            $i++;
-       } 
-              
+       }
+
         return view('publication.edit', compact('publication', 'usersTotal', 'ordreAuteurs', 'initialString'));
     }
-    
+
     public function update(Request $request, $id)
     {
             $publication = $this->publicationRepository->getById($id);
             $publication->title  = $request['title'];
-            
+
             if ($publication->type == 'CI' || $publication->type == 'CF' || $publication->type == 'RI' || $publication->type == 'RF' || $publication->type == 'OS' )
                 $publication->label = $request['label'];
-            
-            
+
+
             $publication->save();
-            
+
             foreach($publication->users()->get() as $user)
             {
                 $publication->users()->detach($user->id);
             }
-            
+
             $orders = explode(',', $request['order_author']);
 
             $i = 1;
@@ -234,11 +232,11 @@ class PublicationsController extends Controller
                 $publication->users()->attach($order, ['publication_id'=> $publication->id,'ordre' => $i]);
                 $i++;
             }
-                  
-                    
-                   
-                
-            
+
+
+
+
+
             $request->session()->flash('alert-success', 'Changement pris en comptes');
 
             return redirect()->action('PublicationsController@index');

@@ -27,6 +27,16 @@ class CreateUsersTable extends Migration
           $table->rememberToken();
           $table->timestamps();
       	});
+
+        Schema::table('users', function(Blueprint $table) {
+          $table->foreign('equipe')->references('id')->on('equipes');
+        });
+
+        $to_insert = array(
+          array('first_name' => 'John','name' => 'Deff', 'email' => 'admin@utt.fr', 'password' => bcrypt('admin'), 'equipe' => 1, 'admin' => 1)
+        );
+        // Insert some stuff
+        DB::table('users')->insert($to_insert);
     }
 
     /**

@@ -21,7 +21,7 @@ class AdminController extends Controller
     {
          $this->rep_user = new UserRepository($user_m = new User());
          $this->rep_publications = new PublicationRepository($publication_m = new Publication());
-
+         $this->middleware('admin');
     }
 
     public function index()
@@ -35,7 +35,12 @@ class AdminController extends Controller
       $nbusers = $this->rep_user->getNbUsers();
 
       // Le chercheur avec le plus de publications
-      $user_nb = $this->rep_user->getUserWithMaxPublications();
+      $user_nb = array();
+      if($nbpublications > 0)
+      {
+          $user_nb = $this->rep_user->getUserWithMaxPublications();
+      }
+
 
       return view('admin.index', compact('nbpublications', 'nbusers','user_nb'));
 
