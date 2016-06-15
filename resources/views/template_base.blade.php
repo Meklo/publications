@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="_token" content="{{ csrf_token() }}" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  
+ <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+{!!Html::style('css/bootstrap-modif.css')!!}
 
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
@@ -25,7 +27,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -33,7 +35,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href={{URL('/')}}>Publications</a>
+        <a class="navbar-brand" href={{URL('/')}}><span class="glyphicon glyphicon-home"/></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -88,18 +90,19 @@
 
 <div class="container-fluid text-center">
   <div class="row content">
+
       <div class="col-sm-2 sidenav">
         @yield('blocgauche')
       </div>
       <div class="col-sm-8 text-left">
         @yield('contenu')
       </div>
-      <div class="col-sm-2 sidenav">
+<!--      <div class="col-sm-2 sidenav">
         @yield('blocdroit')
-        <!-- <div class="well">
+         <div class="well">
           <p>Rectangle</p>
-        </div> -->
-      </div>
+        </div> 
+      </div>-->
     </div>
   </div>
     

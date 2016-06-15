@@ -11,7 +11,10 @@ Publications
 @stop
 
 @section('blocgauche')
+
 @stop
+
+
 
 @section('contenu')
 <br>
@@ -103,16 +106,33 @@ Publications
 </div>
 @stop
 
-@section('blocdroit')
-@stop
 
 @section('pied')
+<div class="col-sm-8  col-sm-offset-1 text-left">
 <div class="row">
-    <div class="col-md-4">
-        <h4>Fonctions de recherche</h4>
+    
+        <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Fonctions de recherche</div>
+      <div class="panel-body">
+        <p>A partir de cette interface vous pouvez filter l'affichage des publications via différentes fonctions de recherche</p>
+      </div>
+
+      <!-- List group -->
+      <ul class="list-group">
+        <li class="list-group-item">Publication d'une equipe</li>
+        <li class="list-group-item">Dapibus ac facilisis in</li>
+        <li class="list-group-item">Morbi leo risus</li>
+        <li class="list-group-item">Porta ac consectetur ac</li>
+        <li class="list-group-item">Vestibulum at eros</li>
+      </ul>
+    </div>
+
         <div class="row">
             {!! link_to_route('equipe.publicationForm', 'Publications equipe')!!}
         </div>
-    </div>
+
+</div>
 </div>
 @stop
+
