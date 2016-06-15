@@ -126,4 +126,9 @@ class UserRepository implements UserRepositoryInterface
                ->having('nb_doublons','>','1')
                ->get();
    }
+   
+   public function getMultipleUsersId($users)
+   {
+       return $this->user->whereIn('id',$users)->get();
+   }
 }

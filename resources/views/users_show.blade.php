@@ -27,7 +27,11 @@
             <p><strong>Email</strong> : {{$user->email}}</p>
             <p><strong>Organisation</strong> : {{$organisation->name}}</p>
             <p><strong>Equipe de recherche</strong> : {{$equipe->name}}</p>
+            
+            <div class="text-center">{!! link_to_route('user.collab', 'Collaborateurs de cet auteur',['id' => $user->id], ['class' => 'btn btn-default'])!!}</div>
           </div>
+        
+        
       </div>
     </div>
   </div>

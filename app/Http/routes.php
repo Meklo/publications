@@ -50,6 +50,8 @@ Route::post('/search', 'SearchController@search');
 
 Route::post('/search/equipe', array('as' => 'publication.searchTeam', 'uses' => 'PublicationsController@postSearchPublicationEquipe'));
 Route::post('/search/categorie', array('as' => 'publication.searchCat', 'uses' => 'PublicationsController@postSearchPublicationCategorie'));
+Route::get('/search/collaboration/{id}', array('as' => 'user.collab','uses' => 'UsersController@collaboration'))->where('id', '[0-9]+');
+
 
 ## Route pour la page d'administration
 Route::get('admin',  array('as' => 'admin.index', 'uses' => 'AdminController@index'));

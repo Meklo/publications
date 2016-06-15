@@ -104,7 +104,7 @@ Publications
         @endforeach
       </table>
       
-      {{ $links }}
+      <div class='text-center'> {{ $links }} </div>
 
       @else
 

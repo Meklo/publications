@@ -38,8 +38,10 @@ class UsersController extends Controller
       //
     $users = $this->userRepository->getWithEquipePaginate($this->nbrPerPage);
   	$links = $users->render();
+        
+        $title = 'Chercheurs';
 
-  	return view('users_liste', compact('users', 'links'));
+  	return view('users_liste', compact('users', 'links', 'title'));
   }
 
   /**
@@ -85,12 +87,41 @@ class UsersController extends Controller
         }
 
 
-        $publications = $this->userRepository->getById($id)->publications()->get();
+        $publications = $this->userRepository->getById($id)->publications()->paginate($this->nbrPerPage);
+        $links = $publications->render();
 
         $auteur = $this->userRepository->getById($id);
         $tabName = 'Publications de ' .$auteur->first_name . ' '. $auteur->name;
 
-        return view('publication.publications_liste', compact('publications', 'categories_tab', 'tabName'));
+        return view('publication.publications_liste', compact('publications', 'categories_tab', 'tabName', 'links'));
+    }
+    
+    public function collaboration($id)
+    {
+        $publications = $this->userRepository->getById($id)->publications()->get();
+   
+        
+        $users_temp = array();
+        foreach($publications as $pub)
+        {
+            array_push($users_temp, $pub->users()->where('users.id', '<>', $id )->get());
+        }
+        
+        $users = array();
+        foreach($users_temp as $user)
+        {
+            foreach ($user as $u)
+            {
+                array_push($users, $u->id);
+            }           
+        }
+        
+        $users = array_unique($users);
+        $users = $this->userRepository->getMultipleUsersId($users);
+        
+        $title = 'Collaborateurs de '. $this->userRepository->getById($id)->first_name . ' '. $this->userRepository->getById($id)->name;
+        return view('users_liste', compact('users', 'title'));
+       
     }
 
 }

@@ -60,7 +60,7 @@ class EquipeRepository implements EquipeRepositoryInterface
         
       public function getPublicationsEquipe($equipe,$year)
       {       
-          $query_results = DB::table('publications')
+          $query_results = DB::table('publications')->select('publications.id')
                    ->join('publication_user', 'publications.id', '=', 'publication_user.publication_id')
                    ->join('users', 'publication_user.user_id', '=', 'users.id')
                    ->join('equipes', 'users.equipe', '=', 'equipes.id')
@@ -68,13 +68,14 @@ class EquipeRepository implements EquipeRepositoryInterface
           
           $publication =  new \App\EloquentModels\Publication();  
           
-      
           $result = array();
           foreach($query_results as $row)
           {
               array_push($result, $row->id);
           }
-          return $publication->whereIn('id',$result)->where('year', '>=', $year)->orderBy('publications.year', 'desc');      
+         
+           return $publication->whereIn('id',$result)->where('year', '>=', $year)->orderBy('publications.year', 'desc');     
+        
       }
 
       public function getPublicationsEquipePaginate($equipe, $year,$n)
