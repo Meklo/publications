@@ -75,7 +75,7 @@ Publications
             <td>{{$categories_tab[$publication->type]}}</td>
             <td>{{$publication->year}}</td>
             @if (Auth::check() and Auth::user()['relations']['equipe']['relations']['organisation']['attributes']['name'] == 'UTT')
-                @if(in_array(Auth::user()->id, $id_users) || Auth::user()->id == $publication->createur)
+                @if(in_array(Auth::user()->id, $id_users))
                     <td>{!! link_to_route('publication.show', 'Voir', ['id' => $publication->id], ['class' => 'btn btn-default'])!!}</td>
                     <td>{!! link_to_route('publication.edit', 'Modifier', [$publication->id], ['class' => 'btn btn-primary'])!!}</td>
                 @else
@@ -107,4 +107,12 @@ Publications
 @stop
 
 @section('pied')
+<div class="row">
+    <div class="col-md-4">
+        <h4>Fonctions de recherche</h4>
+        <div class="row">
+            {!! link_to_route('equipe.publicationForm', 'Publications equipe')!!}
+        </div>
+    </div>
+</div>
 @stop

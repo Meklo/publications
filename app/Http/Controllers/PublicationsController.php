@@ -116,6 +116,25 @@ class PublicationsController extends Controller
 
     public function postPublicationStep2(PublicationCreateRequest $request)
     {
+        $rep_user = new UserRepository($user_m = new User());
+        
+        if(count($request->get('user_list')) == 0){         
+            $request->session()->flash('alert-danger', 'Attention, vous devez au moins sélectionner un auteur');    
+            return redirect ()->back ();
+        }
+        $auteur_utt =false;
+        foreach($request->get('user_list') as $user)
+        {
+            if($rep_user->getById($user)->equipe()->first()->organisation()->first()->name == 'UTT')
+                    $auteur_utt = true;   
+        }
+        
+        if($auteur_utt == false)
+        {
+            $request->session()->flash('alert-danger', 'Attention, vous devez au moins sélectionner un auteur de l\'UTT');
+            return redirect ()->back ();
+        }
+        
         $inputs = $request->all();
         $inputs = array_merge($inputs,array('type' => Session::get('type')));
 

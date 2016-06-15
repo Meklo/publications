@@ -59,6 +59,8 @@ Route::post('publication/create', 'PublicationsController@postPublicationStep2')
 Route::get('/search', 'HomeController@accueil');
 Route::post('/search', 'SearchController@search');
 
+Route::get('/search/publications/equipe', array('as' => 'equipe.publicationForm', 'uses' => 'EquipesController@getPublicationsForm'));
+
 ## Route pour la page d'administration
 Route::get('admin',  array('as' => 'admin.index', 'uses' => 'AdminController@index'));
 Route::get('admin/rank',  array('as' => 'admin.rank', 'uses' => 'AdminController@rank'));

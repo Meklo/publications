@@ -102,8 +102,11 @@
       </div>
     </div>
   </div>
+    
+    <div class="container text-center">
 
     @yield('pied')
 
+    </div>
   </body>
 </html>

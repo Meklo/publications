@@ -49,4 +49,10 @@ class EquipesController extends Controller
 
     return Response::json($options);
   }
+  
+  
+  public function getPublicationsForm()
+  {
+      return view('search.equipe');
+  }
 }
