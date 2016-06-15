@@ -51,7 +51,7 @@ class EquipesController extends Controller
   }
   
   
-  public function getPublicationsForm()
+  public function postPublicationsForm($request)
   {
       return view('search.equipe');
   }

@@ -49,6 +49,25 @@ class PublicationsController extends Controller
 
       return view('publication.publications_liste', compact('publications', 'links', 'categories_tab', 'tabName'));
     }
+    
+    public function postSearchPublicationCategorie(Request $request)
+    {
+
+      $rep_categories = new CategorieRepository($categorie_m = new Categorie());
+      $categories = $rep_categories->getAll();
+      $categories_tab = array();
+      foreach ($categories as $categorie) {
+        $categories_tab[$categorie->sigle] = $categorie->name;
+      }
+
+      $publications = $this->publicationRepository->getPublicationsCategoriePaginate($request->get('type'), $this->nbrPerPage);
+      $links = $publications->render();
+      
+
+      $tabName = 'Publications de la catégorie : '. $request->get('type');
+
+      return view('publication.publications_liste', compact('publications', 'links', 'categories_tab', 'tabName'));
+    }
 
 
 

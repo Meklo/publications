@@ -8,6 +8,16 @@ Publications
 
 @section('head')
 <link rel="stylesheet" href="./css/base.css">
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#searchCat").hide();
+        
+        $("#button_searchCat").click(function(){
+            $("#searchCat").slideToggle();
+        });
+        
+    });
+</script>
 @stop
 
 @section('blocgauche')
@@ -120,18 +130,45 @@ Publications
 
       <!-- List group -->
       <ul class="list-group">
-        <li class="list-group-item">Publication d'une equipe</li>
-        <li class="list-group-item">Dapibus ac facilisis in</li>
-        <li class="list-group-item">Morbi leo risus</li>
-        <li class="list-group-item">Porta ac consectetur ac</li>
-        <li class="list-group-item">Vestibulum at eros</li>
+        
+          <li class="list-group-item"><div id='button_searchCat'><h5>FILTRER CATEGORIE<span class="caret pull-right"/></h5></div>
+              <div id='searchCat' style="display:none;">
+                  
+            {!! Form::open(array('route' => ['publication.searchCat'], 'class' => 'form-inline')) !!}
+        
+            <div class="well well-lg">
+            <div class="form-group">
+              {!! Form::select('type', $categories_tab,  array('id' => 'type', 'class' => 'form-control')) !!}
+            </div>
+
+            <div class="form-group pull-right">
+              {!! Form::submit('Rechercher', array('class' => 'btn btn-primary', 'id' => 'btn_submit')) !!}
+            </div>
+               </div>
+          
+        </div>
+            
+            {!! Form::close() !!}
+        </li>
+        
+<!--         <li class="list-group-item"><h5>FILTRER PUBLICATIONS EQUIPES</h5>
+            {!! Form::open(array('action' => 'EquipesController@postPublicationsForm', 'class' => 'form-inline')) !!}
+        
+            <div class="well well-lg">
+            <div class="form-group">
+              {!! Form::select('type', $categories_tab) !!}
+            </div>
+
+            <div class="form-group pull-right">
+              {!! Form::submit('Rechercher', array('class' => 'btn btn-primary', 'id' => 'btn_submit')) !!}
+            </div>
+        </div>
+            
+            {!! Form::close() !!}
+        </li>-->
+
       </ul>
     </div>
-
-        <div class="row">
-            {!! link_to_route('equipe.publicationForm', 'Publications equipe')!!}
-        </div>
-
 </div>
 </div>
 @stop

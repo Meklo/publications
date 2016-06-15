@@ -25,7 +25,7 @@ class PublicationCreateRequest extends Request
     public function rules()
     {
         return [
-            'title' =>  'required|max:20',
+            'title' =>  'required|max:100',
             'year'  =>  'required|numeric|min:1900|max:2016',
             'label' =>  'max:20',
             'place' =>  'max:20'

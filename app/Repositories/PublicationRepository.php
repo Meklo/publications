@@ -81,6 +81,17 @@ class PublicationRepository implements PublicationRepositoryInterface
       {
           return $this->queryWithUsersCateogorie()->paginate($n);
       }
+      
+      public function getPublicationsCategorie($categorie)
+      {
+          return $this->publication->where('type', 'LIKE', $categorie)
+      	     ->orderBy('publications.year', 'desc');
+      }
+
+      public function getPublicationsCategoriePaginate($categorie, $n)
+      {
+          return $this->getPublicationsCategorie($categorie)->paginate($n);
+      }
 
       public function update($request, $id)
       {
