@@ -82,7 +82,7 @@ Inscription
 
 @section('contenu')
 <br>
-
+<div class="container">
 <div class="flash-message">
     
     
@@ -141,6 +141,7 @@ Inscription
     {!! Form::close() !!}
   </div>
 </div>
+  </div>
 @stop
 
 @section('pied')

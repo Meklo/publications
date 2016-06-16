@@ -10,6 +10,7 @@ Nouvelle publication
 
 @section('contenu')
 <br>
+<div class="container">
 <div class="panel panel-default">
   <div class="panel-heading"><h4>Choississez un type de publication</h4></div>
   <div class="panel-body">
@@ -26,6 +27,8 @@ Nouvelle publication
     </div>
     {!! Form::close() !!}
   </div>
+</div>
+
 </div>
 @stop
 

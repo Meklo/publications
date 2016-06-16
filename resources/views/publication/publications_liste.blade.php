@@ -41,7 +41,7 @@ Publications
   </div> <!-- end .flash-message -->
 
 <div class="container">
-  <div class="col-md-11">
+  <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading"><h4>{{ $tabName }}</h4></div>
 
@@ -123,8 +123,8 @@ Publications
 
 
 @section('pied')
-<div class="col-sm-8  col-sm-offset-1 text-left">
-<div class="row">
+<div class="container">
+  <div class="col-md-12">
     
         <div class="panel panel-default">
       <!-- Default panel contents -->
@@ -182,6 +182,8 @@ Publications
 
       </ul>
     </div>
+  </div>
+    
 </div>
 </div>
 @stop

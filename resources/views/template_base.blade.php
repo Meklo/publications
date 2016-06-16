@@ -91,10 +91,10 @@
 <div class="container-fluid text-center">
   <div class="row content">
 
-      <div class="col-sm-2 sidenav">
+<!--      <div class="col-sm-2 sidenav">
         @yield('blocgauche')
-      </div>
-      <div class="col-sm-8 text-left">
+      </div>-->
+      <div class="col-sm-12 text-left">
         @yield('contenu')
       </div>
 <!--      <div class="col-sm-2 sidenav">
@@ -106,10 +106,10 @@
     </div>
   </div>
     
-    <div class="container text-center">
-
+    <div class="container-fluid text-center">
+        <div class="col-sm-12 text-left">
     @yield('pied')
-
+        </div>
     </div>
   </body>
 </html>
